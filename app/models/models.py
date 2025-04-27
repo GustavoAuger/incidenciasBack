@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Text, ForeignKey, Boolean, Date, Numeric, TIMESTAMP, JSON
 from sqlalchemy.orm import relationship
-from app.database.connection import Base
+from db.session import Base
 
 # Tabla ROL
 class Rol(Base):
@@ -14,6 +14,7 @@ class Usuario(Base):
     __tablename__ = "usuario"
 
     id = Column(Integer, primary_key=True, index=True)
+    email = Column(String(100), unique=True, nullable=False)  # Agregamos el campo email
     nombre = Column(String(100), nullable=False)
     id_rol = Column(Integer, ForeignKey("rol.id", ondelete="RESTRICT"), nullable=False)
     contrasena = Column(Text, nullable=False)
