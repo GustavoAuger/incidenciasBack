@@ -1,15 +1,19 @@
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from app.config.settings import DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME
-from sqlalchemy.orm import Session
+from config.settings import DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME
 
-# Cadena de conexión para PostgreSQL
+# Crear Base
+Base = declarative_base()
+
+# Cadena de conexión para PostgreSQL (Supabase)
 DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
-engine = create_engine(DATABASE_URL)
+# Crear la conexión a la base de datos
+engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-# Dependency para FastAPI (abrir/cerrar sesión)
+# Función para obtener la sesión
 def get_db():
     db = SessionLocal()
     try:

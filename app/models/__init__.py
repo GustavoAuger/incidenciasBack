@@ -1,0 +1,1 @@
+from .models import Usuario, Rol, Transportista, TipoIncidencia, EstadoIncidencia, Incidencia, EstadoTransportista, ReclamoTransportista, Detalle, Reporte
