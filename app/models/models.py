@@ -9,6 +9,8 @@ class Rol(Base):
     id = Column(Integer, primary_key=True, index=True)
     nombre = Column(String(50), nullable=False)
 
+    usuarios = relationship("Usuario", back_populates="rol") # Relación inversa
+
 # Tabla USUARIO
 class Usuario(Base):
     __tablename__ = "usuario"
@@ -21,6 +23,8 @@ class Usuario(Base):
     id_bodega = Column(Integer, nullable=True)
     estado = Column(Boolean, default=True)
 
+    rol = relationship("Rol", back_populates="usuarios") # Relación hacia Rol
+    
 # Tabla TRANSPORTISTA
 class Transportista(Base):
     __tablename__ = "transportista"
