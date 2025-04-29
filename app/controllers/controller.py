@@ -18,3 +18,8 @@ async def validate_user_password(body: dict, db: Session = Depends(get_db)):
 @router.get("/getUsers")
 async def get_users(db: Session = Depends(get_db)):
     return _userService.get_users(db)
+
+@router.post("/createUser")
+def create_user(body: dict, db: Session = Depends(get_db)):
+    success = _userService.create_user(body, db)
+    return success

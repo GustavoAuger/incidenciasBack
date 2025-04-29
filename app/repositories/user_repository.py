@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 from fastapi import HTTPException
-from app.models import Usuario  
+from app.models import Usuario
+from app.models import Rol
 from app.auth import create_access_token  
 from sqlalchemy.orm import joinedload
 import requests
@@ -62,6 +63,37 @@ class UserRepository:
 
         return result # 5. etornamos la lista ! :D
 
+
+    def create_user(self, body: dict, db: Session):
+        # Buscar el rol por nombre
+        rol_nombre=body.get('rol')
+        rol = db.query(Rol).filter(Rol.nombre == rol_nombre).first()
+        print(rol)
+        if not rol:
+            return False  # No se encontró el rol
+
+
+        # Hashear la contraseña
+        plain_password = body.get('contrasena')
+        hashed_password = bcrypt.hashpw(plain_password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+        # Crear usuario
+        nuevo_usuario = Usuario(
+            nombre=body.get('nombre'),
+            email=body.get('email'),
+            id_bodega=body.get('id_bodega'),
+            id_rol=rol.id,
+            contrasena=hashed_password,
+        )
+
+        try:
+            db.add(nuevo_usuario)
+            db.commit()
+            db.refresh(nuevo_usuario)
+            return True
+        except Exception as e:
+            db.rollback()
+            print(f"Error creando usuario: {e}")
+            return False
 
     def close_connection(self):
         self.db.close()
