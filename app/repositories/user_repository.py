@@ -3,14 +3,17 @@ from fastapi import HTTPException
 from app.models import Usuario
 from app.models import Rol
 from app.auth import create_access_token  
+from passlib.context import CryptContext
 from sqlalchemy.orm import joinedload
 import requests
 import bcrypt
 
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
 class UserRepository:
     def __init__(self):
         self.bodegas_url = "https://680fe31d27f2fdac240fb759.mockapi.io/ged_id_bodega/bodega"
-
+    
     def validate_user_password(self, body: dict, db: Session):
         username = body.get("username")
         password = body.get("password")
@@ -20,7 +23,8 @@ class UserRepository:
         if not user:
             raise HTTPException(status_code=400, detail="Usuario o contraseña incorrectos")
 
-        if user.contrasena != password:
+        # Compara la contraseña hasheada usando bcrypt
+        if not pwd_context.verify(password, user.contrasena):
             raise HTTPException(status_code=400, detail="Usuario o contraseña incorrectos")
 
         token_data = {"sub": str(user.id)}
