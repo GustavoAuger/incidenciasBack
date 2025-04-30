@@ -23,3 +23,8 @@ async def get_users(db: Session = Depends(get_db)):
 def create_user(body: dict, db: Session = Depends(get_db)):
     success = _userService.create_user(body, db)
     return success
+
+@router.post("/modifyUser")
+def create_user(body: dict, db: Session = Depends(get_db)):
+    success = _userService.modify_user(body, db)
+    return success

@@ -62,7 +62,8 @@ class UserRepository:
                 "id_bodega": user.id_bodega,
                 "bodega": bodegas_lookup.get(user.id_bodega, "Bodega no encontrada"), # aqui se consume el lookup de acuerdo al id bodega
                 "estado": user.estado,
-                "rol": user.rol.nombre  
+                "rol": user.rol.nombre,  
+                "id_rol": user.id_rol
             })
 
         return result # 5. etornamos la lista ! :D
@@ -98,6 +99,40 @@ class UserRepository:
             db.rollback()
             print(f"Error creando usuario: {e}")
             return False
+
+    def modify_user(self, body: dict, db: Session):
+        # Buscar usuario por ID
+        user_id = body.get('id')
+        usuario = db.query(Usuario).filter(Usuario.id == user_id).first()
+
+        if not usuario:
+            print("Usuario no encontrado")
+            return False
+
+        # Actualizar campos
+        usuario.nombre = body.get('nombre')
+        usuario.email = body.get('email')
+        usuario.id_bodega = body.get('id_bodega')
+        usuario.estado = body.get('estado')
+        usuario.id_rol = body.get("id_rol")
+
+        # Si se pasó una nueva contraseña, la actualizamos hasheada
+        nueva_contra = body.get('contrasena')
+        if nueva_contra:
+            hashed_password = bcrypt.hashpw(nueva_contra.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+            usuario.contrasena = hashed_password
+
+        try:
+            db.commit()
+            db.refresh(usuario)
+            return True
+        except Exception as e:
+            db.rollback()
+            print(f"Error actualizando usuario: {e}")
+            return False
+
+
+
 
     def close_connection(self):
         self.db.close()
