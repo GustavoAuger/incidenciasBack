@@ -16,7 +16,8 @@ class UserService:
     def get_users(self, db):
         return self.repository.get_users(db)
   
-
     def create_user(self, body, db):
         return self.repository.create_user(body, db)
 
+    def modify_user(self, body, db):
+        return self.repository.modify_user(body, db)
