@@ -42,12 +42,11 @@ class UserRepository:
         # 3. Creamos un lookup {id_numero: nombre_bodega}
         bodegas_lookup = {}
         for bodega in bodegas_data:
-            id_local = bodega.get("id_local")
+            id_num = bodega.get("id")
             nombre_bodega = bodega.get("nombre_bodega")
-            if id_local and id_local.startswith("LO-"):
+            if id_num:
                 try:
-                    id_num = int(id_local.split("-")[1])  
-                    bodegas_lookup[id_num] = nombre_bodega
+                    bodegas_lookup[int(id_num)] = nombre_bodega
                 except ValueError:
                     pass
 
@@ -64,7 +63,7 @@ class UserRepository:
                 "rol": user.rol.nombre,  
                 "id_rol": user.id_rol
             })
-
+        print(bodegas_lookup)
         return result # 5. retornamos la lista ! :D
 
 
