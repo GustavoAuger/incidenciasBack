@@ -7,13 +7,13 @@ from app.auth import create_access_token  # Importa el create_access_token
 from app.services.user_service import UserService
 from app.services.incidencia_service import IncidenciaService
 from app.services.external_service import ExternalService
-
+from app.services.transportista_service import TransportistaService
 
 router = APIRouter()
 _userService = UserService()
 _externalService = ExternalService()
 _incidenciaService = IncidenciaService()
-
+_trasportistaService = TransportistaService()
 
 
 @router.post("/validateLogin")
@@ -63,4 +63,14 @@ async def get_tipo_incidencia(db: Session = Depends(get_db)):
 @router.post("/createIncidencia")
 async  def create_user(body: dict, db: Session = Depends(get_db)):
     success = _incidenciaService.create_incidencia(body, db)
+    return success
+
+@router.get("/getTransportistas")
+async def get_transportistas(db: Session = Depends(get_db)):
+    success = _trasportistaService.get_transportistas(db)
+    return success
+
+@router.get("/getEstadosTransportista")
+async def get_e_ransportistas(db: Session = Depends(get_db)):
+    success = _trasportistaService.get_e_transportistas(db)
     return success
