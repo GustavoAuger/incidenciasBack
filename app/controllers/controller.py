@@ -40,3 +40,8 @@ async def create_user(db: Session = Depends(get_db)):
 async def get_bodegas(db: Session = Depends(get_db)):
     success = _externalService.get_bodegas(db)
     return success
+
+@router.get("/getProductos")
+async def get_bodegas(db: Session = Depends(get_db)):
+    success = _externalService.get_productos(db)
+    return success

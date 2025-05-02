@@ -9,3 +9,6 @@ class ExternalService:
 
     def get_bodegas(self, db):
         return self.repository.get_bodegas(db)
+    
+    def get_productos(self, db):
+        return self.repository.get_productos(db)
