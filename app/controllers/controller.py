@@ -2,13 +2,17 @@ from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
 from db.session import get_db  
 from app.models import Usuario
+from app.models import Incidencia
 from app.auth import create_access_token  # Importa el create_access_token
 from app.services.user_service import UserService
+from app.services.incidencia_service import IncidenciaService
 from app.services.external_service import ExternalService
+
+
 router = APIRouter()
 _userService = UserService()
 _externalService = ExternalService()
-
+_incidenciaService = IncidenciaService()
 
 
 
@@ -44,4 +48,19 @@ async def get_bodegas(db: Session = Depends(get_db)):
 @router.get("/getProductos")
 async def get_bodegas(db: Session = Depends(get_db)):
     success = _externalService.get_productos(db)
+    return success
+
+@router.get("/getTipoincidencias")
+async def get_tipo_incidencia(db: Session = Depends(get_db)):
+    success = _incidenciaService.get_tipo_incidencia(db)
+    return success
+
+@router.get("/getEstadoincidencias")
+async def get_tipo_incidencia(db: Session = Depends(get_db)):
+    success = _incidenciaService.get_estado_incidencia(db)
+    return success
+
+@router.post("/createIncidencia")
+async  def create_user(body: dict, db: Session = Depends(get_db)):
+    success = _incidenciaService.create_incidencia(body, db)
     return success
