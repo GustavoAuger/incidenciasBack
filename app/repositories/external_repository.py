@@ -11,6 +11,7 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 class ExternalRepository:
     def __init__(self):
         self.bodegas_url = "https://680fe31d27f2fdac240fb759.mockapi.io/ged_id_bodega/bodega"
+        self.producto_url = "https://680fe31d27f2fdac240fb759.mockapi.io/ged_id_bodega/productos"
     
     def get_bodegas(self, db: Session):
         response = requests.get(self.bodegas_url)
@@ -23,3 +24,8 @@ class ExternalRepository:
             })
 
         return result #retornamos la lista ! :D
+    
+    def get_productos(self, db: Session):
+        response = requests.get(self.producto_url)
+        productos = response.json()
+        return productos
