@@ -31,12 +31,12 @@ async def create_user(body: dict, db: Session = Depends(get_db)):
     success = _userService.modify_user(body, db)
     return success
 
-@router.post("/modifyUser")
-async def create_user(body: dict, db: Session = Depends(get_db)):
-    success = _userService.modify_user(body, db)
+@router.get("/getRol")
+async def create_user(db: Session = Depends(get_db)):
+    success = _userService.get_rol(db)
     return success
 
-@router.get("/getRol")
-async def get_rol(db: Session = Depends(get_db)):
-    success = _userService.get_rol(db)
+@router.get("/getBodegas")
+async def get_bodegas(db: Session = Depends(get_db)):
+    success = _externalService.get_bodegas(db)
     return success
