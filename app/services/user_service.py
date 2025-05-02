@@ -13,8 +13,11 @@ class UserService:
     def validate_user_password(self, body, db):
         return self.repository.validate_user_password(body, db)
 
-    def get_users(self, db):
+    def getUsers(self, db):
         return self.repository.get_users(db)
+    
+    def get_rol(self, db):
+        return self.repository.get_rol(db)
   
     def create_user(self, body, db):
         return self.repository.create_user(body, db)

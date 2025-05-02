@@ -33,9 +33,8 @@ class UserRepository:
         return {"access_token": access_token, "id_rol": user.id_rol}
     
     def get_users(self, db: Session):
-        # 1. Traemos los usuarios con su rol (/join con la tabla de rol)
-        users = db.query(Usuario).options(joinedload(Usuario.rol)).all()
-
+        # 1. Traemos los usuarios con su rol (/join con la tabla de rol) / se agrega fultro estado = true
+        users = db.query(Usuario).options(joinedload(Usuario.rol)).filter(Usuario.estado == True).all()
         # 2. Traemos las bodegas desde la MockAPI (Simulación datos de HEAD)
         response = requests.get(self.bodegas_url)
         bodegas_data = response.json()
@@ -66,18 +65,10 @@ class UserRepository:
                 "id_rol": user.id_rol
             })
 
-        return result # 5. etornamos la lista ! :D
+        return result # 5. retornamos la lista ! :D
 
 
     def create_user(self, body: dict, db: Session):
-        # Buscar el rol por nombre
-        rol_nombre=body.get('rol')
-        rol = db.query(Rol).filter(Rol.nombre == rol_nombre).first()
-        print(rol)
-        if not rol:
-            return False  # No se encontró el rol
-
-
         # Hashear la contraseña
         plain_password = body.get('contrasena')
         hashed_password = bcrypt.hashpw(plain_password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
@@ -86,7 +77,7 @@ class UserRepository:
             nombre=body.get('nombre'),
             email=body.get('email'),
             id_bodega=body.get('id_bodega'),
-            id_rol=rol.id,
+            id_rol=body.get('id_rol'),
             contrasena=hashed_password,
         )
 
@@ -132,7 +123,9 @@ class UserRepository:
             return False
 
 
-
-
+    def get_rol(self, db: Session):
+        rol = db.query(Rol).all()
+        return rol
+        
     def close_connection(self):
         self.db.close()
