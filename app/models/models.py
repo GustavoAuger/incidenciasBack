@@ -93,6 +93,7 @@ class Detalle(Base):
     peso_recepcion = Column(Numeric(10, 2), nullable=False)
     cantidad = Column(Integer, nullable=False)
     id_guia = Column(String(50), nullable=False)
+    ruta_storage = Column(Text, nullable=True) 
 
 # Tabla REPORTE
 class Reporte(Base):

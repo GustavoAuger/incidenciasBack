@@ -74,3 +74,9 @@ async def get_transportistas(db: Session = Depends(get_db)):
 async def get_e_ransportistas(db: Session = Depends(get_db)):
     success = _trasportistaService.get_e_transportistas(db)
     return success
+
+@router.post("/createDetalle")
+async  def create_user(body: dict, db: Session = Depends(get_db)):
+    success = _incidenciaService.create_detalle(body, db)
+    return success
+
