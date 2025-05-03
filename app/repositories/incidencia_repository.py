@@ -54,7 +54,7 @@ class IncidenciaRepository:
             db.add(nueva_incidencia)
             db.commit()
             db.refresh(nueva_incidencia)
-            return True
+            return nueva_incidencia.id
         except Exception as e:
             db.rollback()
             print(f"Error creando incidencia: {e}")
