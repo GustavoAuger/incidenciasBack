@@ -17,3 +17,6 @@ class IncidenciaService:
     
     def create_detalle(self, body, db):
         return self.repository.create_detalle(body, db)
+
+    def get_incidencias(self, db):
+        return self.repository.get_incidencias(db)

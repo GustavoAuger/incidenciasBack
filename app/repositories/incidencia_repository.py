@@ -105,3 +105,7 @@ class IncidenciaRepository:
         except Exception as e:
             print(f"Error al subir imagen a Supabase: {e}")
             return None
+
+    def get_incidencias(self, db):
+        incidencaias = db.query(Incidencia).all()
+        return incidencaias
