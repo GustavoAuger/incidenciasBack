@@ -60,6 +60,15 @@ class Incidencia(Base):
     id_estado = Column(Integer, ForeignKey("estado_incidencia.id", ondelete="RESTRICT"), nullable=False)
     id_usuario = Column(Integer, ForeignKey("usuario.id", ondelete="SET NULL"), nullable=False)
     id_transportista = Column(Integer, ForeignKey("transportista.id", ondelete="SET NULL"))
+    ruta_storage = Column(Text, nullable=True)
+    tipo_de_diferencia = Column(String(20), nullable=False) 
+
+    __table_args__ = (
+        CheckConstraint(
+            "tipo_de_diferencia IN ('faltante', 'sobrante')",
+            name="check_tipo_de_diferencia"
+        ),
+    ) 
 
 # Tabla ESTADO_TRANSPORTISTA
 class EstadoTransportista(Base):
