@@ -42,7 +42,7 @@ class IncidenciaRepository:
 
         nueva_incidencia = Incidencia(
             origen=body.get('id_bodega'),
-            origen=body.get('id_bodega_destino'),
+            destino=body.get('id_bodega_destino'),
             ots=body.get('ots'),
             fecha_recepcion=body.get("fecha"),
             observaciones=body.get("observaciones"),
