@@ -97,13 +97,6 @@ class Detalle(Base):
     ruta_storage = Column(Text, nullable=True)
     tipo_de_diferencia = Column(String(20), nullable=False) 
 
-    __table_args__ = (
-        CheckConstraint(
-            "tipo_de_diferencia IN ('faltante', 'sobrante')",
-            name="check_tipo_de_diferencia"
-        ),
-    )  
-
 # Tabla REPORTE
 class Reporte(Base):
     __tablename__ = "reporte"

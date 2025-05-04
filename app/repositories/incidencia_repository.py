@@ -48,7 +48,7 @@ class IncidenciaRepository:
             observaciones=body.get("observaciones"),
             id_estado=body.get("id_estado"),
             id_usuario=body.get("id_usuario"),
-            id_transportista=body.get("id_transportista")
+            id_transportista=body.get("id_transportista"),
             id_tipo_incidencia=body.get("id_tipo_incidencia")
         )
 
