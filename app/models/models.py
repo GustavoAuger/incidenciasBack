@@ -53,22 +53,15 @@ class Incidencia(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     fecha_emision = Column(TIMESTAMP, server_default="CURRENT_TIMESTAMP")
-    origen = Column(String(100))
+    origen = Column(String(2))
+    destino = Column(String(2), nullable=True)
     ots = Column(String(50))
     fecha_recepcion = Column(Date)
     observaciones = Column(Text)
     id_estado = Column(Integer, ForeignKey("estado_incidencia.id", ondelete="RESTRICT"), nullable=False)
     id_usuario = Column(Integer, ForeignKey("usuario.id", ondelete="SET NULL"), nullable=False)
     id_transportista = Column(Integer, ForeignKey("transportista.id", ondelete="SET NULL"))
-    ruta_storage = Column(Text, nullable=True)
-    tipo_de_diferencia = Column(String(20), nullable=False) 
-
-    __table_args__ = (
-        CheckConstraint(
-            "tipo_de_diferencia IN ('faltante', 'sobrante')",
-            name="check_tipo_de_diferencia"
-        ),
-    ) 
+    id_tipo_incidencia = Column(Integer, ForeignKey("tipo_incidencia.id", ondelete="RESTRICT"), nullable=False)
 
 # Tabla ESTADO_TRANSPORTISTA
 class EstadoTransportista(Base):
@@ -95,14 +88,21 @@ class Detalle(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     id_incidencia = Column(Integer, ForeignKey("incidencia.id", ondelete="CASCADE"), nullable=False)
-    id_tipo_incidencia = Column(Integer, ForeignKey("tipo_incidencia.id", ondelete="RESTRICT"), nullable=False)
     sku_producto = Column(String(50), nullable=False)
     nro_bulto = Column(Integer, nullable=False)
     peso_origen = Column(Numeric(10, 2), nullable=False)
     peso_recepcion = Column(Numeric(10, 2), nullable=False)
     cantidad = Column(Integer, nullable=False)
     id_guia = Column(String(50), nullable=False)
-    ruta_storage = Column(Text, nullable=True) 
+    ruta_storage = Column(Text, nullable=True)
+    tipo_de_diferencia = Column(String(20), nullable=False) 
+
+    __table_args__ = (
+        CheckConstraint(
+            "tipo_de_diferencia IN ('faltante', 'sobrante')",
+            name="check_tipo_de_diferencia"
+        ),
+    )  
 
 # Tabla REPORTE
 class Reporte(Base):
