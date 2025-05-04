@@ -42,12 +42,14 @@ class IncidenciaRepository:
 
         nueva_incidencia = Incidencia(
             origen=body.get('id_bodega'),
+            origen=body.get('id_bodega_destino'),
             ots=body.get('ots'),
             fecha_recepcion=body.get("fecha"),
             observaciones=body.get("observaciones"),
             id_estado=body.get("id_estado"),
             id_usuario=body.get("id_usuario"),
             id_transportista=body.get("id_transportista")
+            id_tipo_incidencia=body.get("id_tipo_incidencia")
         )
 
         try:
@@ -69,7 +71,7 @@ class IncidenciaRepository:
 
         nuevo_detalle = Detalle(
             id_incidencia=body.get("id_incidencia"),
-            id_tipo_incidencia=body.get("id_tipo_incidencia"),
+            tipo_de_diferencia=body.get("tipo_de_diferencia"),
             sku_producto=body.get("sku_producto"),
             nro_bulto=body.get("nro_bulto"),
             peso_origen=body.get("peso_origen"),
