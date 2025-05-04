@@ -9,6 +9,7 @@ from app.models import TipoIncidencia
 from app.models import EstadoIncidencia
 from app.models import Incidencia
 from app.models import Detalle
+from app.models import Usuario
 import os
 from supabase import create_client, Client
 from datetime import datetime
@@ -108,6 +109,14 @@ class IncidenciaRepository:
             print(f"Error al subir imagen a Supabase: {e}")
             return None
 
-    def get_incidencias(self, db):
-        incidencaias = db.query(Incidencia).all()
+    def get_incidencias(self, body, db):
+        user_id = body.get('id_usuario')
+        usuario = db.query(Usuario).filter(Usuario.id == user_id).first()
+        id_rol=usuario.id_rol
+        if(id_rol==2):
+            incidencaias = db.query(Incidencia).filter(Incidencia.id_usuario == user_id).all()
+        else:
+            incidencaias = db.query(Incidencia).all()
+
+        print(id_rol)
         return incidencaias
