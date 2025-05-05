@@ -30,7 +30,7 @@ class UserRepository:
         token_data = {"sub": str(user.id)}
         access_token = create_access_token(data=token_data)
 
-        return {"access_token": access_token, "id_rol": user.id_rol, "id_bodega_destino":user.id_bodega}
+        return {"access_token": access_token, "id_rol": user.id_rol, "id_bodega_destino":user.id_bodega, "id":user.id}
     
     def get_users(self, db: Session):
         # 1. Traemos los usuarios con su rol (/join con la tabla de rol) / se agrega fultro estado = true
