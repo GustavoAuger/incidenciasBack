@@ -113,7 +113,10 @@ class IncidenciaRepository:
         user_id = body.get('id_usuario')
         usuario = db.query(Usuario).filter(Usuario.id == user_id).first()
         id_rol=usuario.id_rol
-        if(id_rol==2):
+        if(id_rol==4): #tienda
+            id_bodega=usuario.id_bodega
+            print(id_bodega)
+        if(id_rol==2): #gestor
             incidencaias = db.query(Incidencia).filter(Incidencia.id_usuario == user_id).all()
         else:
             incidencaias = db.query(Incidencia).all()
