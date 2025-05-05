@@ -14,6 +14,7 @@ import os
 from supabase import create_client, Client
 from datetime import datetime
 from dotenv import load_dotenv
+import requests
 import bcrypt
 
 # Cargar variables del archivo .env
@@ -29,7 +30,8 @@ supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 class IncidenciaRepository:
-    
+    def __init__(self):
+        self.bodegas_url = "https://680fe31d27f2fdac240fb759.mockapi.io/ged_id_bodega/bodega"
     
     def get_tipo_incidencia(self, db: Session):
         incidencias = db.query(TipoIncidencia).all()
@@ -94,7 +96,7 @@ class IncidenciaRepository:
 
 
     def upload_image_to_supabase(file, filename_prefix="detalle"): #se consume en la función de arriba si es que se carga imagen
-
+        
         try:
             now = datetime.utcnow().strftime("%Y%m%d%H%M%S")
             filename = f"{filename_prefix}_{now}_{file.filename}"
@@ -110,6 +112,20 @@ class IncidenciaRepository:
             return None
 
     def get_incidencias(self, body, db):
+        # Traer todas las bodegas, sus datos
+        response = requests.get(self.bodegas_url)
+        bodegas = response.json()  # Esto es una lista de dicts
+
+        # Creamos de la siguiente manera: {id: {"nombre_bodega": ..., "id_local": ...}}
+        bodegas_map = {
+            int(bodega["id"]): {
+                "nombre_bodega": bodega["nombre_bodega"],
+                "id_local": bodega["id_local"]
+                }
+                for bodega in bodegas if str(bodega["id"]).isdigit()
+        }
+
+
         user_id = body.get('id_usuario')
         usuario = db.query(Usuario).filter(Usuario.id == user_id).first()
         id_rol=usuario.id_rol
@@ -117,9 +133,43 @@ class IncidenciaRepository:
             id_bodega=usuario.id_bodega
             print(id_bodega)
         if(id_rol==2): #gestor
-            incidencaias = db.query(Incidencia).filter(Incidencia.id_usuario == user_id).all()
+            incidencias = db.query(Incidencia).filter(Incidencia.id_usuario == user_id).all()
         else:
-            incidencaias = db.query(Incidencia).all()
+            incidencias = db.query(Incidencia).options(
+                joinedload(Incidencia.transportista),
+                joinedload(Incidencia.estado)
+            ).all()
+        print("bodegas_map keys:", bodegas_map.keys())
+        
+        result=[]
 
-        print(id_rol)
-        return incidencaias
+        for incidencia in incidencias:
+            origen_id = int(incidencia.origen)
+            destino_id = int(incidencia.destino)
+
+            origen_data = bodegas_map.get(
+                origen_id, 
+                {"nombre_bodega": f"ID {origen_id}", "id_local": "N/A"}
+            )
+            destino_data = bodegas_map.get(
+                destino_id, 
+                {"nombre_bodega": f"ID {destino_id}", "id_local": "N/A"}
+            )
+       
+            result.append({
+                "id": incidencia.id,
+                "fecha_recepcion": incidencia.fecha_recepcion,
+                "id_estado": incidencia.id_estado,
+                "tipo_estado": incidencia.estado.tipo_estado,
+                "transportista": incidencia.transportista.nombre,
+                "origen_id_local": origen_data["id_local"],
+                "destino": destino_data["nombre_bodega"],
+                "destino_id_local": destino_data["id_local"],
+                "ots": incidencia.ots,
+                "fecha_emision": incidencia.fecha_emision,
+                "observaciones": incidencia.observaciones,
+                "id_usuario": incidencia.id_usuario,
+                "id_tipo_incidencia": incidencia.id_tipo_incidencia
+            })
+
+        return result

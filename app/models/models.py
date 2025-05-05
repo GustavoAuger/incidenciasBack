@@ -47,6 +47,8 @@ class EstadoIncidencia(Base):
     id = Column(Integer, primary_key=True, index=True)
     tipo_estado = Column(String(20), nullable=False)
 
+    incidencias = relationship("Incidencia", back_populates="estado")
+
 # Tabla INCIDENCIA
 class Incidencia(Base):
     __tablename__ = "incidencia"
@@ -62,7 +64,9 @@ class Incidencia(Base):
     id_usuario = Column(Integer, ForeignKey("usuario.id", ondelete="SET NULL"), nullable=False)
     id_transportista = Column(Integer, ForeignKey("transportista.id", ondelete="SET NULL"))
     id_tipo_incidencia = Column(Integer, ForeignKey("tipo_incidencia.id", ondelete="RESTRICT"), nullable=False)
-
+        
+    transportista = relationship("Transportista")
+    estado = relationship("EstadoIncidencia", back_populates="incidencias")
 # Tabla ESTADO_TRANSPORTISTA
 class EstadoTransportista(Base):
     __tablename__ = "estado_transportista"
