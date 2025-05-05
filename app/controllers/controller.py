@@ -81,7 +81,7 @@ async  def create_user(body: dict, db: Session = Depends(get_db)):
     return success
 
 @router.get("/getIncidencias")
-async  def create_user(body: dict, db: Session = Depends(get_db)):
+async  def get_incidencias(body: dict, db: Session = Depends(get_db)):
     success = _incidenciaService.get_incidencias(body, db)
     return success
 
