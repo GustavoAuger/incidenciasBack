@@ -16,6 +16,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 import requests
 import bcrypt
+from sqlalchemy.orm import joinedload
 
 # Cargar variables del archivo .env
 load_dotenv()
