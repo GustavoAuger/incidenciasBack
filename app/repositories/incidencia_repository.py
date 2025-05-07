@@ -43,29 +43,49 @@ class IncidenciaRepository:
         return estado
     
     def create_incidencia(self, body: dict, db: Session):
-
-        nueva_incidencia = Incidencia(
-            origen=body.get('id_bodega'),
-            destino=body.get('id_bodega_destino'),
-            ots=body.get('ots'),
-            fecha_recepcion=body.get("fecha"),
-            observaciones=body.get("observaciones"),
-            id_estado=body.get("id_estado"),
-            id_usuario=body.get("id_usuario"),
-            id_transportista=body.get("id_transportista"),
-            id_tipo_incidencia=body.get("id_tipo_incidencia")
-        )
-
         try:
-            db.add(nueva_incidencia)
-            db.commit()
-            db.refresh(nueva_incidencia)
-            return nueva_incidencia.id
-        except Exception as e:
-            db.rollback()
-            print(f"Error creando incidencia: {e}")
-            return False
+            # Crear la incidencia principal
+            nueva_incidencia = Incidencia(
+                origen=body['incidencia'].get('id_bodega'),
+                destino=body['incidencia'].get('destino_id_local'),
+                ots=body['incidencia'].get('ots'),
+                fecha_recepcion=body['incidencia'].get("fecha"),
+                observaciones=body['incidencia'].get("observaciones"),
+                id_estado=body['incidencia'].get("id_estado"),
+                id_usuario=body['incidencia'].get("id_usuario"),
+                id_transportista=body['incidencia'].get("id_transportista"),
+                id_tipo_incidencia=body['incidencia'].get("id_tipo_incidencia")
+            )
 
+            # Agregar y obtener el ID de la incidencia
+            db.add(nueva_incidencia)
+            db.flush()  # Esto asigna el ID pero no hace commit aún
+            id_incidencia = nueva_incidencia.id
+
+            # Procesar cada detalle
+            for detalle in body['detalles']:
+                nuevo_detalle = Detalle(
+                    id_incidencia=id_incidencia,
+                    tipo_de_diferencia=detalle.get("tipoDiferencia"),
+                    sku_producto=detalle.get("sku"),
+                    nro_bulto=detalle.get("numBulto"),
+                    peso_origen=detalle.get("pesoOrigen"),
+                    peso_recepcion=detalle.get("pesoRecepcion"),
+                    cantidad=detalle.get("cantidad"),
+                    id_guia=detalle.get("numGuia")
+                )
+                db.add(nuevo_detalle)
+
+            # Si todo salió bien, hacer commit de la transacción
+            db.commit()
+            return id_incidencia
+
+        except Exception as e:
+            # Si algo salió mal, hacer rollback
+            db.rollback()
+            print(f"Error creando incidencia y detalles: {e}")
+            raise HTTPException(status_code=500, detail=str(e))
+#no borrar esto pues es cuando cargaba imagen, se usara despues como referencia para la ruta
     def create_detalle(self, body: dict, db: Session, file: Optional[UploadFile] = None):
         ruta_storage = None
 
