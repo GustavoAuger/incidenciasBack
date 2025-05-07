@@ -20,3 +20,7 @@ class IncidenciaService:
 
     def get_incidencias(self, body, db):
         return self.repository.get_incidencias(body, db)
+
+    def get_detalle_incidencias(self, body, db):
+        return self.repository.get_detalle_incidencias(body, db)
+        

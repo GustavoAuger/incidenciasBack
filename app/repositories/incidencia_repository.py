@@ -194,3 +194,36 @@ class IncidenciaRepository:
             })
 
         return result
+
+    def get_detalle_incidencias(self, body: dict, db: Session):
+        id_incidencia = body.get('id_incidencia')
+        if not id_incidencia:
+            raise HTTPException(
+                status_code=400,
+                detail="Se requiere el parámetro 'id_incidencia'"
+            )
+            
+        detalles = db.query(Detalle).filter(Detalle.id_incidencia == id_incidencia).all()
+        if not detalles:
+            raise HTTPException(
+                status_code=404,
+                detail=f"No se encontraron detalles para la incidencia con ID {id_incidencia}"
+            )
+        
+        # Transformar los datos al formato esperado por el frontend
+        detalles_formateados = []
+        for detalle in detalles:
+            detalles_formateados.append({
+                "id": detalle.id,
+                "idIncidencia": detalle.id_incidencia,
+                "sku": detalle.sku_producto,
+                "numBulto": detalle.nro_bulto,
+                "pesoOrigen": float(detalle.peso_origen),  # Convertir Decimal a float
+                "pesoRecepcion": float(detalle.peso_recepcion),  # Convertir Decimal a float
+                "cantidad": detalle.cantidad,
+                "numGuia": detalle.id_guia,
+                "tipoDiferencia": detalle.tipo_de_diferencia,
+                "descripcion": ""  # Agregar este campo si lo necesitas
+            })
+        
+        return detalles_formateados

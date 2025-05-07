@@ -85,3 +85,9 @@ async  def get_incidencias(body: dict, db: Session = Depends(get_db)):
     success = _incidenciaService.get_incidencias(body, db)
     return success
 
+@router.post("/getDetallesIncidencia")
+async  def get_incidencias(body: dict, db: Session = Depends(get_db)):
+    success = _incidenciaService.get_detalle_incidencias(body, db)
+    print(success)
+    return success
+
