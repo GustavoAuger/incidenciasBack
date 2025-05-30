@@ -12,6 +12,7 @@ class ExternalRepository:
     def __init__(self):
         self.bodegas_url = "https://680fe31d27f2fdac240fb759.mockapi.io/ged_id_bodega/bodega"
         self.producto_url = "https://680fe31d27f2fdac240fb759.mockapi.io/ged_id_bodega/productos"
+        self.guia_url = "https://672258a92108960b9cc41077.mockapi.io/api/guias/guia"  
     
     def get_bodegas(self, db: Session):
         response = requests.get(self.bodegas_url)
@@ -19,6 +20,7 @@ class ExternalRepository:
         result = []
         for bodega in bodegas:
             result.append({
+                "id_bodega": bodega["id_bodega"],
                 "id": bodega["id"],
                 "nombre": bodega["nombre_bodega"],
             })
@@ -29,3 +31,8 @@ class ExternalRepository:
         response = requests.get(self.producto_url)
         productos = response.json()
         return productos
+    
+    def get_guias(self, db: Session):
+        response = requests.get(self.guia_url)
+        guias = response.json()
+        return guias

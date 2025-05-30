@@ -50,6 +50,11 @@ async def get_bodegas(db: Session = Depends(get_db)):
     success = _externalService.get_productos(db)
     return success
 
+@router.get("/getGuias")
+async def get_bodegas(db: Session = Depends(get_db)):
+    success = _externalService.get_guias(db)
+    return success
+
 @router.get("/getTipoincidencias")
 async def get_tipo_incidencia(db: Session = Depends(get_db)):
     success = _incidenciaService.get_tipo_incidencia(db)

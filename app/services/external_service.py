@@ -12,3 +12,6 @@ class ExternalService:
     
     def get_productos(self, db):
         return self.repository.get_productos(db)
+
+    def get_guias(self, db):
+        return self.repository.get_guias(db)

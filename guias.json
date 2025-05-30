@@ -1,0 +1,656 @@
+[
+  {
+    "id": "271998",
+    "numguia": "271998",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-001",
+    "sku_total": [
+      { "sku": "103206", "total": 2 },
+      { "sku": "103205", "total": 1 },
+      { "sku": "103207", "total": 1 },
+      { "sku": "103208", "total": 8 },
+      { "sku": "103209", "total": 6 }
+    ]
+  },
+  {
+    "id": "271999",
+    "numguia": "271999",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-002",
+    "sku_total": [
+      { "sku": "103208", "total": 2 },
+      { "sku": "103210", "total": 1 },
+      { "sku": "103211", "total": 4 },
+      { "sku": "103212", "total": 1 },
+      { "sku": "103213", "total": 1 }
+    ]
+  },
+  {
+    "id": "272000",
+    "numguia": "272000",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-003",
+    "sku_total": [
+      { "sku": "103205", "total": 3 },
+      { "sku": "103209", "total": 5 },
+      { "sku": "103211", "total": 2 },
+      { "sku": "103214", "total": 7 }
+    ]
+  },
+  {
+    "id": "272001",
+    "numguia": "272001",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-004",
+    "sku_total": [
+      { "sku": "103206", "total": 4 },
+      { "sku": "103210", "total": 3 },
+      { "sku": "103213", "total": 6 }
+    ]
+  },
+  {
+    "id": "272002",
+    "numguia": "272002",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-005",
+    "sku_total": [
+      { "sku": "103207", "total": 5 },
+      { "sku": "103212", "total": 2 },
+      { "sku": "103215", "total": 4 }
+    ]
+  },
+  {
+    "id": "272003",
+    "numguia": "272003",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-006",
+    "sku_total": [
+      { "sku": "103208", "total": 7 },
+      { "sku": "103211", "total": 3 },
+      { "sku": "103214", "total": 5 }
+    ]
+  },
+  {
+    "id": "272004",
+    "numguia": "272004",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-001",
+    "sku_total": [
+      { "sku": "103209", "total": 4 },
+      { "sku": "103213", "total": 8 },
+      { "sku": "103215", "total": 2 }
+    ]
+  },
+  {
+    "id": "272005",
+    "numguia": "272005",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-002",
+    "sku_total": [
+      { "sku": "103205", "total": 6 },
+      { "sku": "103210", "total": 4 },
+      { "sku": "103212", "total": 3 }
+    ]
+  },
+  {
+    "id": "272006",
+    "numguia": "272006",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-003",
+    "sku_total": [
+      { "sku": "103206", "total": 5 },
+      { "sku": "103211", "total": 7 },
+      { "sku": "103214", "total": 2 }
+    ]
+  },
+  {
+    "id": "272007",
+    "numguia": "272007",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-004",
+    "sku_total": [
+      { "sku": "103207", "total": 3 },
+      { "sku": "103213", "total": 5 },
+      { "sku": "103215", "total": 6 }
+    ]
+  },
+  {
+    "id": "272008",
+    "numguia": "272008",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-005",
+    "sku_total": [
+      { "sku": "103208", "total": 4 },
+      { "sku": "103212", "total": 8 },
+      { "sku": "103214", "total": 3 }
+    ]
+  },
+  {
+    "id": "272009",
+    "numguia": "272009",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-006",
+    "sku_total": [
+      { "sku": "103209", "total": 2 },
+      { "sku": "103211", "total": 6 },
+      { "sku": "103213", "total": 4 }
+    ]
+  },
+  {
+    "id": "272010",
+    "numguia": "272010",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-001",
+    "sku_total": [
+      { "sku": "103205", "total": 7 },
+      { "sku": "103210", "total": 5 },
+      { "sku": "103215", "total": 3 }
+    ]
+  },
+  {
+    "id": "272011",
+    "numguia": "272011",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-002",
+    "sku_total": [
+      { "sku": "103206", "total": 6 },
+      { "sku": "103212", "total": 4 },
+      { "sku": "103214", "total": 8 }
+    ]
+  },
+  {
+    "id": "272012",
+    "numguia": "272012",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-003",
+    "sku_total": [
+      { "sku": "103207", "total": 2 },
+      { "sku": "103211", "total": 5 },
+      { "sku": "103213", "total": 7 }
+    ]
+  },
+  {
+    "id": "272013",
+    "numguia": "272013",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-004",
+    "sku_total": [
+      { "sku": "103208", "total": 3 },
+      { "sku": "103210", "total": 8 },
+      { "sku": "103215", "total": 5 }
+    ]
+  },
+  {
+    "id": "272014",
+    "numguia": "272014",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-005",
+    "sku_total": [
+      { "sku": "103209", "total": 4 },
+      { "sku": "103212", "total": 6 },
+      { "sku": "103214", "total": 2 }
+    ]
+  },
+  {
+    "id": "272015",
+    "numguia": "272015",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-006",
+    "sku_total": [
+      { "sku": "103205", "total": 5 },
+      { "sku": "103211", "total": 3 },
+      { "sku": "103213", "total": 7 }
+    ]
+  },
+  {
+    "id": "272016",
+    "numguia": "272016",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-001",
+    "sku_total": [
+      { "sku": "103206", "total": 8 },
+      { "sku": "103210", "total": 4 },
+      { "sku": "103215", "total": 6 }
+    ]
+  },
+  {
+    "id": "272017",
+    "numguia": "272017",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-020",
+    "sku_total": [
+      { "sku": "103207", "total": 3 },
+      { "sku": "103212", "total": 7 },
+      { "sku": "103214", "total": 5 }
+    ]
+  },
+  {
+    "id": "272018",
+    "numguia": "272018",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-003",
+    "sku_total": [
+      { "sku": "103208", "total": 6 },
+      { "sku": "103211", "total": 2 },
+      { "sku": "103213", "total": 4 }
+    ]
+  },
+  {
+    "id": "272019",
+    "numguia": "272019",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-004",
+    "sku_total": [
+      { "sku": "103209", "total": 5 },
+      { "sku": "103210", "total": 7 },
+      { "sku": "103215", "total": 3 }
+    ]
+  },
+  {
+    "id": "272020",
+    "numguia": "272020",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-005",
+    "sku_total": [
+      { "sku": "103205", "total": 4 },
+      { "sku": "103212", "total": 6 },
+      { "sku": "103214", "total": 8 }
+    ]
+  },
+  {
+    "id": "272021",
+    "numguia": "272021",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-006",
+    "sku_total": [
+      { "sku": "103206", "total": 7 },
+      { "sku": "103211", "total": 5 },
+      { "sku": "103213", "total": 3 }
+    ]
+  },
+  {
+    "id": "272022",
+    "numguia": "272022",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-007",
+    "sku_total": [
+      { "sku": "103207", "total": 2 },
+      { "sku": "103210", "total": 6 },
+      { "sku": "103215", "total": 4 }
+    ]
+  },
+  {
+    "id": "272023",
+    "numguia": "272023",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-008",
+    "sku_total": [
+      { "sku": "103208", "total": 5 },
+      { "sku": "103212", "total": 3 },
+      { "sku": "103214", "total": 7 }
+    ]
+  },
+  {
+    "id": "272024",
+    "numguia": "272024",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-009",
+    "sku_total": [
+      { "sku": "103209", "total": 8 },
+      { "sku": "103211", "total": 4 },
+      { "sku": "103213", "total": 6 }
+    ]
+  },
+  {
+    "id": "272025",
+    "numguia": "272025",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-010",
+    "sku_total": [
+      { "sku": "103205", "total": 3 },
+      { "sku": "103210", "total": 7 },
+      { "sku": "103215", "total": 5 }
+    ]
+  },
+  {
+    "id": "272026",
+    "numguia": "272026",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-011",
+    "sku_total": [
+      { "sku": "103206", "total": 6 },
+      { "sku": "103212", "total": 4 },
+      { "sku": "103214", "total": 2 }
+    ]
+  },
+  {
+    "id": "272027",
+    "numguia": "272027",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-012",
+    "sku_total": [
+      { "sku": "103207", "total": 5 },
+      { "sku": "103211", "total": 8 },
+      { "sku": "103213", "total": 3 }
+    ]
+  },
+  {
+    "id": "272028",
+    "numguia": "272028",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-013",
+    "sku_total": [
+      { "sku": "103208", "total": 4 },
+      { "sku": "103210", "total": 6 },
+      { "sku": "103215", "total": 7 }
+    ]
+  },
+  {
+    "id": "272029",
+    "numguia": "272029",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-014",
+    "sku_total": [
+      { "sku": "103209", "total": 2 },
+      { "sku": "103212", "total": 5 },
+      { "sku": "103214", "total": 3 }
+    ]
+  },
+  {
+    "id": "272030",
+    "numguia": "272030",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-015",
+    "sku_total": [
+      { "sku": "103205", "total": 7 },
+      { "sku": "103211", "total": 4 },
+      { "sku": "103213", "total": 6 }
+    ]
+  },
+  {
+    "id": "272031",
+    "numguia": "272031",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-016",
+    "sku_total": [
+      { "sku": "103206", "total": 3 },
+      { "sku": "103210", "total": 8 },
+      { "sku": "103215", "total": 5 }
+    ]
+  },
+  {
+    "id": "272032",
+    "numguia": "272032",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-017",
+    "sku_total": [
+      { "sku": "103207", "total": 6 },
+      { "sku": "103212", "total": 2 },
+      { "sku": "103214", "total": 4 }
+    ]
+  },
+  {
+    "id": "272033",
+    "numguia": "272033",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-018",
+    "sku_total": [
+      { "sku": "103208", "total": 5 },
+      { "sku": "103211", "total": 7 },
+      { "sku": "103213", "total": 3 }
+    ]
+  },
+  {
+    "id": "272034",
+    "numguia": "272034",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-019",
+    "sku_total": [
+      { "sku": "103209", "total": 4 },
+      { "sku": "103210", "total": 6 },
+      { "sku": "103215", "total": 8 }
+    ]
+  },
+  {
+    "id": "272035",
+    "numguia": "272035",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-020",
+    "sku_total": [
+      { "sku": "103205", "total": 2 },
+      { "sku": "103212", "total": 5 },
+      { "sku": "103214", "total": 7 }
+    ]
+  },
+  {
+    "id": "272036",
+    "numguia": "272036",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-001",
+    "sku_total": [
+      { "sku": "103206", "total": 3 },
+      { "sku": "103211", "total": 6 },
+      { "sku": "103213", "total": 4 }
+    ]
+  },
+  {
+    "id": "272037",
+    "numguia": "272037",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-002",
+    "sku_total": [
+      { "sku": "103207", "total": 8 },
+      { "sku": "103210", "total": 5 },
+      { "sku": "103215", "total": 2 }
+    ]
+  },
+  {
+    "id": "272038",
+    "numguia": "272038",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-003",
+    "sku_total": [
+      { "sku": "103208", "total": 4 },
+      { "sku": "103212", "total": 7 },
+      { "sku": "103214", "total": 6 }
+    ]
+  },
+  {
+    "id": "272039",
+    "numguia": "272039",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-004",
+    "sku_total": [
+      { "sku": "103209", "total": 3 },
+      { "sku": "103211", "total": 5 },
+      { "sku": "103213", "total": 8 }
+    ]
+  },
+  {
+    "id": "272040",
+    "numguia": "272040",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-005",
+    "sku_total": [
+      { "sku": "103205", "total": 6 },
+      { "sku": "103210", "total": 4 },
+      { "sku": "103215", "total": 7 }
+    ]
+  },
+  {
+    "id": "272041",
+    "numguia": "272041",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-006",
+    "sku_total": [
+      { "sku": "103206", "total": 2 },
+      { "sku": "103212", "total": 8 },
+      { "sku": "103214", "total": 5 }
+    ]
+  },
+  {
+    "id": "272042",
+    "numguia": "272042",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-007",
+    "sku_total": [
+      { "sku": "103207", "total": 3 },
+      { "sku": "103211", "total": 6 },
+      { "sku": "103213", "total": 4 }
+    ]
+  },
+  {
+    "id": "272043",
+    "numguia": "272043",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-008",
+    "sku_total": [
+      { "sku": "103208", "total": 7 },
+      { "sku": "103210", "total": 5 },
+      { "sku": "103215", "total": 2 }
+    ]
+  },
+  {
+    "id": "272044",
+    "numguia": "272044",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-009",
+    "sku_total": [
+      { "sku": "103209", "total": 4 },
+      { "sku": "103212", "total": 8 },
+      { "sku": "103214", "total": 6 }
+    ]
+  },
+  {
+    "id": "272045",
+    "numguia": "272045",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-010",
+    "sku_total": [
+      { "sku": "103205", "total": 3 },
+      { "sku": "103211", "total": 7 },
+      { "sku": "103213", "total": 5 }
+    ]
+  },
+  {
+    "id": "272046",
+    "numguia": "272046",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-011",
+    "sku_total": [
+      { "sku": "103206", "total": 6 },
+      { "sku": "103210", "total": 2 },
+      { "sku": "103215", "total": 4 }
+    ]
+  },
+  {
+    "id": "272047",
+    "numguia": "272047",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-012",
+    "sku_total": [
+      { "sku": "103207", "total": 8 },
+      { "sku": "103212", "total": 5 },
+      { "sku": "103214", "total": 3 }
+    ]
+  },
+  {
+    "id": "272048",
+    "numguia": "272048",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-013",
+    "sku_total": [
+      { "sku": "103208", "total": 4 },
+      { "sku": "103211", "total": 7 },
+      { "sku": "103213", "total": 6 }
+    ]
+  },
+  {
+    "id": "272049",
+    "numguia": "272049",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-014",
+    "sku_total": [
+      { "sku": "103209", "total": 2 },
+      { "sku": "103210", "total": 5 },
+      { "sku": "103215", "total": 8 }
+    ]
+  },
+  {
+    "id": "272050",
+    "numguia": "272050",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-015",
+    "sku_total": [
+      { "sku": "103205", "total": 3 },
+      { "sku": "103212", "total": 6 },
+      { "sku": "103214", "total": 4 }
+    ]
+  },
+  {
+    "id": "272051",
+    "numguia": "272051",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-016",
+    "sku_total": [
+      { "sku": "103206", "total": 7 },
+      { "sku": "103211", "total": 5 },
+      { "sku": "103213", "total": 3 }
+    ]
+  },
+  {
+    "id": "272052",
+    "numguia": "272052",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-017",
+    "sku_total": [
+      { "sku": "103207", "total": 2 },
+      { "sku": "103210", "total": 6 },
+      { "sku": "103215", "total": 4 }
+    ]
+  },
+  {
+    "id": "272053",
+    "numguia": "272053",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-018",
+    "sku_total": [
+      { "sku": "103205", "total": 4 },
+      { "sku": "103208", "total": 7 },
+      { "sku": "103211", "total": 3 }
+    ]
+  },
+  {
+    "id": "272054",
+    "numguia": "272054",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-019",
+    "sku_total": [
+      { "sku": "103206", "total": 5 },
+      { "sku": "103209", "total": 2 },
+      { "sku": "103213", "total": 8 }
+    ]
+  },
+  {
+    "id": "272055",
+    "numguia": "272055",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-020",
+    "sku_total": [
+      { "sku": "103207", "total": 6 },
+      { "sku": "103210", "total": 3 },
+      { "sku": "103214", "total": 9 }
+    ]
+  },
+  {
+    "id": "272097",
+    "numguia": "272097",
+    "id_bod_origen": "BC-001",
+    "id_bod_destino": "LO-001",
+    "sku_total": [
+      { "sku": "103205", "total": 5 },
+      { "sku": "103209", "total": 3 },
+      { "sku": "103212", "total": 7 }
+    ]
+  }
+]

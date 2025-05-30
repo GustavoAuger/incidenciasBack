@@ -1,6 +1,6 @@
 [
   {
-    "id_local": "LO-001",
+    "id_bodega": "LO-001",
     "nombre_bodega": "LOCAL BELLOTO",
     "correo": "BELLOTO@HEAD.COM",
     "direccion": "Av. Los Pinos 1234, Quilpué",
@@ -8,7 +8,7 @@
     "id": "1"
   },
   {
-    "id_local": "LO-002",
+    "id_bodega": "LO-002",
     "nombre_bodega": "LOCAL MARINA",
     "correo": "MARINA@HEAD.COM",
     "direccion": "Av. Libertad 5678, Viña del Mar",
@@ -16,7 +16,7 @@
     "id": "2"
   },
   {
-    "id_local": "LO-003",
+    "id_bodega": "LO-003",
     "nombre_bodega": "LOCAL MELIPILLA",
     "correo": "MELIPILLA@HEAD.COM",
     "direccion": "Calle O’Higgins 234, Melipilla",
@@ -24,7 +24,7 @@
     "id": "3"
   },
   {
-    "id_local": "LO-004",
+    "id_bodega": "LO-004",
     "nombre_bodega": "LOCAL CONCEPCION CENTRO",
     "correo": "CONCEPCION CENTRO@HEAD.COM",
     "direccion": "Barros Arana 456, Concepción",
@@ -32,7 +32,7 @@
     "id": "4"
   },
   {
-    "id_local": "LO-005",
+    "id_bodega": "LO-005",
     "nombre_bodega": "LOCAL ARAUCO MAIPU",
     "correo": "ARAUCO MAIPU@HEAD.COM",
     "direccion": "Av. Americo Vespucio 899, Maipú",
@@ -40,7 +40,7 @@
     "id": "5"
   },
   {
-    "id_local": "LO-006",
+    "id_bodega": "LO-006",
     "nombre_bodega": "LOCAL SOL 2",
     "correo": "SOL 2@HEAD.COM",
     "direccion": "Calle Troncos Viejos 321, Quilpué",
@@ -48,7 +48,7 @@
     "id": "6"
   },
   {
-    "id_local": "LO-007",
+    "id_bodega": "LO-007",
     "nombre_bodega": "LOCAL SAN FERNANDO",
     "correo": "SAN FERNANDO@HEAD.COM",
     "direccion": "Av. Manso de Velasco 1111, San Fernando",
@@ -56,7 +56,7 @@
     "id": "7"
   },
   {
-    "id_local": "LO-008",
+    "id_bodega": "LO-008",
     "nombre_bodega": "LOCAL SAN BERNARDO",
     "correo": "SAN BERNARDO@HEAD.COM",
     "direccion": "Camino Nos 4500, San Bernardo",
@@ -64,7 +64,7 @@
     "id": "8"
   },
   {
-    "id_local": "LO-009",
+    "id_bodega": "LO-009",
     "nombre_bodega": "LOCAL PASEO ROSS",
     "correo": "PASEO ROSS@HEAD.COM",
     "direccion": "Paseo Ross 100, San Antonio",
@@ -72,7 +72,7 @@
     "id": "9"
   },
   {
-    "id_local": "LO-010",
+    "id_bodega": "LO-010",
     "nombre_bodega": "LOCAL OUTLET PARK",
     "correo": "OUTLET PARK@HEAD.COM",
     "direccion": "Av. El Parque 2020, Curauma",
@@ -80,7 +80,7 @@
     "id": "10"
   },
   {
-    "id_local": "LO-011",
+    "id_bodega": "LO-011",
     "nombre_bodega": "LOCAL PASEO QUILPUE",
     "correo": "PASEO QUILPUE@HEAD.COM",
     "direccion": "Calle Blanco 150, Quilpué",
@@ -88,7 +88,7 @@
     "id": "11"
   },
   {
-    "id_local": "LO-012",
+    "id_bodega": "LO-012",
     "nombre_bodega": "LOCAL COSTANERA CENTER",
     "correo": "COSTANERA CENTER@HEAD.COM",
     "direccion": "Av. Andrés Bello 2425, Providencia",
@@ -96,7 +96,7 @@
     "id": "12"
   },
   {
-    "id_local": "LO-013",
+    "id_bodega": "LO-013",
     "nombre_bodega": "LOCAL PUERTO MONTT",
     "correo": "PUERTO MONTT@HEAD.COM",
     "direccion": "Av. Presidente Ibáñez 3456, Puerto Montt",
@@ -104,7 +104,7 @@
     "id": "13"
   },
   {
-    "id_local": "LO-014",
+    "id_bodega": "LO-014",
     "nombre_bodega": "LOCAL PATIO MAIPU",
     "correo": "PATIO MAIPU@HEAD.COM",
     "direccion": "Av. Pajaritos 3000, Maipú",
@@ -112,7 +112,7 @@
     "id": "14"
   },
   {
-    "id_local": "LO-015",
+    "id_bodega": "LO-015",
     "nombre_bodega": "LOCAL PLAZA VESPUCIO",
     "correo": "PLAZA VESPUCIO@HEAD.COM",
     "direccion": "Av. Vicuña Mackenna 7110, La Florida",
@@ -120,7 +120,7 @@
     "id": "15"
   },
   {
-    "id_local": "LO-016",
+    "id_bodega": "LO-016",
     "nombre_bodega": "LOCAL PLAZA SUR",
     "correo": "PLAZA SUR@HEAD.COM",
     "direccion": "Av. Jorge Alessandri 10501, San Bernardo",
@@ -128,7 +128,7 @@
     "id": "16"
   },
   {
-    "id_local": "LO-017",
+    "id_bodega": "LO-017",
     "nombre_bodega": "LOCAL IQUIQUE",
     "correo": "IQUIQUE@HEAD.COM",
     "direccion": "Av. Héroes de la Concepción 999, Iquique",
@@ -136,7 +136,7 @@
     "id": "17"
   },
   {
-    "id_local": "LO-018",
+    "id_bodega": "LO-018",
     "nombre_bodega": "LOCAL VALDIVIA",
     "correo": "VALDIVIA@HEAD.COM",
     "direccion": "Av. Alemania 2000, Valdivia",
@@ -144,7 +144,7 @@
     "id": "18"
   },
   {
-    "id_local": "LO-019",
+    "id_bodega": "LO-019",
     "nombre_bodega": "LOCAL TEMUCO",
     "correo": "TEMUCO@HEAD.COM",
     "direccion": "Av. Alemania 1055, Temuco",
@@ -152,7 +152,7 @@
     "id": "19"
   },
   {
-    "id_local": "LO-020",
+    "id_bodega": "LO-020",
     "nombre_bodega": "LOCAL CALAMA",
     "correo": "CALAMA@HEAD.COM",
     "direccion": "Av. Balmaceda 3020, Calama",
@@ -160,7 +160,7 @@
     "id": "20"
   },
   {
-    "id_local": "BC-001",
+    "id_bodega": "BC-001",
     "nombre_bodega": "BODEGA CENTRAL",
     "correo": "-",
     "direccion": "Camino Industrial 500, Quilicura",
@@ -168,7 +168,7 @@
     "id": "21"
   },
   {
-    "id_local": "BDE-001",
+    "id_bodega": "BDE-001",
     "nombre_bodega": "BODEGA DEVOLUCIONES",
     "correo": "-",
     "direccion": "Calle de Retornos 890, Pudahuel",
