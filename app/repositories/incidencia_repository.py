@@ -141,7 +141,7 @@ class IncidenciaRepository:
         bodegas_map = {
             int(bodega["id"]): {
                 "nombre_bodega": bodega["nombre_bodega"],
-                "id_local": bodega["id_local"]
+                "id_bodega": bodega["id_bodega"]
                 }
                 for bodega in bodegas if str(bodega["id"]).isdigit()
         }
@@ -170,11 +170,11 @@ class IncidenciaRepository:
 
             origen_data = bodegas_map.get(
                 origen_id, 
-                {"nombre_bodega": f"ID {origen_id}", "id_local": "N/A"}
+                {"nombre_bodega": f"ID {origen_id}", "id_bodega": "N/A"}
             )
             destino_data = bodegas_map.get(
                 destino_id, 
-                {"nombre_bodega": f"ID {destino_id}", "id_local": "N/A"}
+                {"nombre_bodega": f"ID {destino_id}", "id_bodega": "N/A"}
             )
        
             result.append({
@@ -183,9 +183,9 @@ class IncidenciaRepository:
                 "id_estado": incidencia.id_estado,
                 "tipo_estado": incidencia.estado.tipo_estado,
                 "transportista": incidencia.transportista.nombre,
-                "origen_id_local": origen_data["id_local"],
+                "origen_id_local": origen_data["id_bodega"],
                 "destino": destino_data["nombre_bodega"],
-                "destino_id_local": destino_data["id_local"],
+                "destino_id_local": destino_data["id_bodega"],
                 "ots": incidencia.ots,
                 "fecha_emision": incidencia.fecha_emision,
                 "observaciones": incidencia.observaciones,
