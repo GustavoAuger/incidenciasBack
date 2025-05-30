@@ -15,3 +15,6 @@ class ExternalService:
 
     def get_guias(self, db):
         return self.repository.get_guias(db)
+
+    def get_skus_by_guia(self, body, db):
+        return self.repository.get_producto_guia(body, db)

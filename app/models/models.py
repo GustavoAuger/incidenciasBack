@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, Text, ForeignKey, Boolean, Date, Numeric, TIMESTAMP, JSON
 from sqlalchemy.orm import relationship
 from db.session import Base
+from pydantic import BaseModel
 
 # Tabla ROL
 class Rol(Base):
@@ -59,7 +60,7 @@ class Incidencia(Base):
     destino = Column(String(2), nullable=True)
     ots = Column(String(50))
     fecha_recepcion = Column(Date)
-    observaciones = Column(Text)
+    observaciones = Column(Text, nullable=True)
     id_estado = Column(Integer, ForeignKey("estado_incidencia.id", ondelete="RESTRICT"), nullable=False)
     id_usuario = Column(Integer, ForeignKey("usuario.id", ondelete="SET NULL"), nullable=False)
     id_transportista = Column(Integer, ForeignKey("transportista.id", ondelete="SET NULL"))
@@ -109,3 +110,7 @@ class Reporte(Base):
     fecha_generacion = Column(TIMESTAMP(timezone=True), server_default="NOW()")
     datos = Column(JSON, nullable=False)
     tipo_reporte = Column(String(30), nullable=False)
+
+
+class GuiaRequest(BaseModel):
+    guia_numero: str

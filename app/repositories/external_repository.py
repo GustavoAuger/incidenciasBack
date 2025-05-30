@@ -36,3 +36,24 @@ class ExternalRepository:
         response = requests.get(self.guia_url)
         guias = response.json()
         return guias
+
+    def get_producto_guia(self, body: dict, db: Session):
+    #Obtiene los SKUs para un número de guía específico desde la mock API
+        guia_numero = body.get('guia_numero')
+        if not guia_numero:
+            return []
+
+        try:
+            response = requests.get(self.guia_url)
+            response.raise_for_status()
+            guias = response.json()
+
+            guia = next((g for g in guias if str(g.get('numguia')) == str(guia_numero)), None)
+
+            if guia and 'sku_total' in guia:
+                return guia['sku_total'] if isinstance(guia['sku_total'], list) else []
+            return []
+
+        except requests.exceptions.RequestException as e:
+            print(f"Error al obtener guía {guia_numero} desde la mock API: {e}")
+            return []

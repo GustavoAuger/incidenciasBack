@@ -8,6 +8,7 @@ from app.services.user_service import UserService
 from app.services.incidencia_service import IncidenciaService
 from app.services.external_service import ExternalService
 from app.services.transportista_service import TransportistaService
+from app.models.models import GuiaRequest # Importa el nuevo modelo
 
 router = APIRouter()
 _userService = UserService()
@@ -96,3 +97,9 @@ async  def get_incidencias(body: dict, db: Session = Depends(get_db)):
     print(success)
     return success
 
+@router.post("/getSkusByGuia") # Cambiamos a POST
+def get_skus_by_guia_from_body(body: dict, db: Session = Depends(get_db)):
+    skus = _externalService.get_skus_by_guia(body, db)
+    if not skus:
+        raise HTTPException(status_code=404, detail="SKUs not found for the given guide number")
+    return skus
