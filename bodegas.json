@@ -174,5 +174,13 @@
     "direccion": "Calle de Retornos 890, Pudahuel",
     "zona": "-",
     "id": "22"
+  },
+  {
+    "id_bodega": "LO-000",
+    "nombre_bodega": "BODEGA VIRTUAL",
+    "correo": "BODEGA@HEAD.COM",
+    "direccion": "NO APLICA",
+    "zona": "NO APLICA",
+    "id": "23"
   }
 ]

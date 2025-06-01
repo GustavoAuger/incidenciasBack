@@ -21,16 +21,41 @@ class UserRepository:
         user = db.query(Usuario).filter(Usuario.email == username).first()
 
         if not user:
-            raise HTTPException(status_code=400, detail="Usuario o contraseña incorrectos")
+            raise HTTPException(
+                status_code=400,
+                detail={
+                    "type": "auth_error",
+                    "message": "Usuario o contraseña incorrectos"
+                }
+            )
 
-        # Compara la contraseña hasheada usando bcrypt
         if not pwd_context.verify(password, user.contrasena):
-            raise HTTPException(status_code=400, detail="Usuario o contraseña incorrectos")
+            raise HTTPException(
+                status_code=400,
+                detail={
+                    "type": "auth_error",
+                    "message": "Usuario o contraseña incorrectos"
+                }
+            )
+
+        if user.estado == False:
+            raise HTTPException(
+                status_code=400,
+                detail={
+                    "type": "inactive_user",
+                    "message": "Usuario inactivo. Por favor, contacte al administrador."
+                }
+            )
 
         token_data = {"sub": str(user.id)}
         access_token = create_access_token(data=token_data)
 
-        return {"access_token": access_token, "id_rol": user.id_rol, "id_bodega":user.id_bodega, "id":user.id}
+        return {
+            "access_token": access_token,
+            "id_rol": user.id_rol,
+            "id_bodega": user.id_bodega,
+            "id": user.id
+        }
     
     def get_users(self, db: Session):
         # 1. Traemos los usuarios con su rol (/join con la tabla de rol) / se agrega fultro estado = true
@@ -125,6 +150,10 @@ class UserRepository:
     def get_rol(self, db: Session):
         rol = db.query(Rol).all()
         return rol
+    
+    def get_emails(self, db: Session):
+        emails = db.query(Usuario.email).all()
+        return [email[0] for email in emails]
         
     def close_connection(self):
         self.db.close()

@@ -103,3 +103,7 @@ def get_skus_by_guia_from_body(body: dict, db: Session = Depends(get_db)):
     if not skus:
         raise HTTPException(status_code=404, detail="SKUs not found for the given guide number")
     return skus
+
+@router.get("/getMails")
+async def get_emails(db: Session = Depends(get_db)):
+    return _userService.get_emails(db)

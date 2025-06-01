@@ -24,3 +24,6 @@ class UserService:
 
     def modify_user(self, body, db):
         return self.repository.modify_user(body, db)
+       
+    def get_emails(self, db):
+        return self.repository.get_emails(db)
