@@ -185,7 +185,7 @@ class IncidenciaRepository:
                 "transportista": incidencia.transportista.nombre,
                 "origen_id_local": origen_data["id_bodega"],
                 "destino": destino_data["nombre_bodega"],
-                "destino_id_local": destino_data["id_bodega"],
+                "destino_id_bodega": destino_data["id_bodega"],
                 "ots": incidencia.ots,
                 "fecha_emision": incidencia.fecha_emision,
                 "observaciones": incidencia.observaciones,
