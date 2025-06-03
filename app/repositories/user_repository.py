@@ -157,3 +157,16 @@ class UserRepository:
         
     def close_connection(self):
         self.db.close()
+
+    def get_IdBodegaUser(self, db: Session):
+        # 1. Traemos los usuarios con su rol (/join con la tabla de rol) / se agrega fultro estado = true
+        users = db.query(Usuario).options(joinedload(Usuario.rol)).filter(Usuario.estado == True).all()
+        result = []
+        for user in users:
+            if user.id_bodega<21:
+                result.append({
+                    "id": 'LO-'+str(user.id_bodega),
+                    "id_bodega": user.id_bodega
+
+                })
+        return result 

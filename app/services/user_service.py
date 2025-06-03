@@ -27,3 +27,7 @@ class UserService:
        
     def get_emails(self, db):
         return self.repository.get_emails(db)
+
+    def get_IdBodegaUser(self, db):
+        return self.repository.get_IdBodegaUser(db)
+        

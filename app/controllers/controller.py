@@ -107,3 +107,7 @@ def get_skus_by_guia_from_body(body: dict, db: Session = Depends(get_db)):
 @router.get("/getMails")
 async def get_emails(db: Session = Depends(get_db)):
     return _userService.get_emails(db)
+
+@router.get("/getIdBodegaUser")
+async def get_IdBodegaUser(db: Session = Depends(get_db)):
+    return _userService.get_IdBodegaUser(db)
