@@ -56,14 +56,14 @@ class Incidencia(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     fecha_emision = Column(TIMESTAMP, server_default="CURRENT_TIMESTAMP")
-    origen = Column(String(2))
-    destino = Column(String(2), nullable=True)
+    origen = Column(String(2), nullable=False)
+    destino = Column(String(2), nullable=False)
     ots = Column(String(50))
     fecha_recepcion = Column(Date)
     observaciones = Column(Text, nullable=True)
     id_estado = Column(Integer, ForeignKey("estado_incidencia.id", ondelete="RESTRICT"), nullable=False)
     id_usuario = Column(Integer, ForeignKey("usuario.id", ondelete="SET NULL"), nullable=False)
-    id_transportista = Column(Integer, ForeignKey("transportista.id", ondelete="SET NULL"))
+    id_transportista = Column(Integer, ForeignKey("transportista.id", ondelete="SET NULL"), nullable=False)
     id_tipo_incidencia = Column(Integer, ForeignKey("tipo_incidencia.id", ondelete="RESTRICT"), nullable=False)
         
     transportista = relationship("Transportista")

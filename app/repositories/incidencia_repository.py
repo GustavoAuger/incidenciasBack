@@ -47,7 +47,7 @@ class IncidenciaRepository:
             # Crear la incidencia principal
             nueva_incidencia = Incidencia(
                 origen=body['incidencia'].get('id_bodega'),
-                destino=body['incidencia'].get('destino_id_local'),
+                destino=body['incidencia'].get('destino_id_bodega'),
                 ots=body['incidencia'].get('ots'),
                 fecha_recepcion=body['incidencia'].get("fecha"),
                 observaciones=body['incidencia'].get("observaciones"),
