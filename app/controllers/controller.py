@@ -111,3 +111,8 @@ async def get_emails(db: Session = Depends(get_db)):
 @router.get("/getIdBodegaUser")
 async def get_IdBodegaUser(db: Session = Depends(get_db)):
     return _userService.get_IdBodegaUser(db)
+
+
+@router.post("/actualizarDetalle")
+async def actualizar_detalle(body: dict, db: Session = Depends(get_db)):
+    return _incidenciaService.actualizar_detalle(body, db)
