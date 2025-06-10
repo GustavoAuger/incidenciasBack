@@ -1,6 +1,6 @@
 from app.repositories.incidencia_repository import IncidenciaRepository
 import jwt
-
+import httpx
 
 class IncidenciaService:
     def __init__(self):
@@ -26,3 +26,9 @@ class IncidenciaService:
         
     def actualizar_detalle(self, body, db):
         return self.repository.actualizar_detalle(body, db)
+
+    def correo(self, body, db):
+        id_bodega = body.get('id_bodega')
+        if not id_bodega:
+            raise HTTPException(status_code=400, detail="Se requiere el id_bodega")
+        return self.repository.enviar_correo_bodega(id_bodega)

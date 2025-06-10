@@ -17,6 +17,14 @@ from dotenv import load_dotenv
 import requests
 import bcrypt
 from sqlalchemy.orm import joinedload
+#importanciones para correo
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
+
+
 
 # Cargar variables del archivo .env
 load_dotenv()
@@ -42,6 +50,52 @@ class IncidenciaRepository:
         estado = db.query(EstadoIncidencia).all()
         return estado
     
+    def enviar_correo_bodega(self, id_bodega: str) -> dict:
+        try:
+            # Obtener información de la bodega
+            response = requests.get(f"{self.bodegas_url}/{id_bodega}")
+            if response.status_code != 200:
+                raise HTTPException(status_code=404, detail="Bodega no encontrada")
+                
+            bodega = response.json()
+            correo_destino = bodega.get('correo')
+            nombre_bodega = bodega.get('nombre_bodega')
+            
+            if not correo_destino:
+                raise HTTPException(status_code=400, detail="La bodega no tiene correo registrado")
+            
+            # Configuración del servidor SMTP
+            smtp_server = "smtp.gmail.com"
+            smtp_port = 587
+            sender_email = os.getenv("EMAIL_USER")
+            sender_password = os.getenv("EMAIL_PASSWORD")
+            
+            if not sender_email or not sender_password:
+                raise HTTPException(status_code=500, detail="Configuración de correo no disponible")
+            
+            # Crear mensaje
+            message = MIMEMultipart()
+            message["From"] = sender_email
+            message["To"] = correo_destino
+            message["Subject"] = f"Nueva Incidencia Registrada - {nombre_bodega}"
+            
+            body = f"Se ha registrado una nueva incidencia para la bodega {nombre_bodega}."
+            message.attach(MIMEText(body, "plain"))
+            
+            # Enviar correo
+            with smtplib.SMTP(smtp_server, smtp_port) as server:
+                server.starttls()
+                server.login(sender_email, sender_password)
+                server.send_message(message)
+            
+            return {"message": "Correo enviado exitosamente"}
+            
+        except HTTPException as he:
+            raise he
+        except Exception as e:
+            print(f"Error enviando correo: {e}")
+            raise HTTPException(status_code=500, detail=str(e))
+
     def create_incidencia(self, body: dict, db: Session):
         try:
             # Crear la incidencia principal
@@ -78,6 +132,20 @@ class IncidenciaRepository:
 
             # Si todo salió bien, hacer commit de la transacción
             db.commit()
+            # Enviar correo a la bodega de origen
+            try:
+                # llamamos directamente a la funcion
+                resultado = self.enviar_correo_bodega(body['incidencia'].get('id_bodega'))
+
+                # para ver si lo hizo
+                if resultado.get('message') == "Correo enviado exitosamente":
+                    print("Correo enviado exitosamente.")
+                else:
+                    print(f"Error al enviar correo: {resultado.get('message')}")
+
+            except Exception as e:
+                print(f"Error enviando correo: {e}")
+
             return id_incidencia
 
         except Exception as e:

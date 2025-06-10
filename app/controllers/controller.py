@@ -116,3 +116,7 @@ async def get_IdBodegaUser(db: Session = Depends(get_db)):
 @router.post("/actualizarDetalle")
 async def actualizar_detalle(body: dict, db: Session = Depends(get_db)):
     return _incidenciaService.actualizar_detalle(body, db)
+
+@router.post("/correo")
+async def enviar_correo(body: dict, db: Session = Depends(get_db)):
+    return _incidenciaService.correo(body, db)
