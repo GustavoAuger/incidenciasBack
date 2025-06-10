@@ -60,6 +60,8 @@ class Incidencia(Base):
     destino = Column(String(2), nullable=False)
     ots = Column(String(50))
     fecha_recepcion = Column(Date)
+    valorizado = Column(Numeric(10, 2), nullable=True)  # ahora puede ser nulo
+    total_item=Column(Integer, nullable=True) #por ahora
     observaciones = Column(Text, nullable=True)
     id_estado = Column(Integer, ForeignKey("estado_incidencia.id", ondelete="RESTRICT"), nullable=False)
     id_usuario = Column(Integer, ForeignKey("usuario.id", ondelete="SET NULL"), nullable=False)

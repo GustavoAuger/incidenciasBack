@@ -258,7 +258,9 @@ class IncidenciaRepository:
                 "fecha_emision": incidencia.fecha_emision,
                 "observaciones": incidencia.observaciones,
                 "id_usuario": incidencia.id_usuario,
-                "id_tipo_incidencia": incidencia.id_tipo_incidencia
+                "id_tipo_incidencia": incidencia.id_tipo_incidencia,
+                "valorizado": incidencia.valorizado,
+                "total_item": incidencia.total_item
             })
 
         return result
