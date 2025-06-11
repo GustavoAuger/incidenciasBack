@@ -108,7 +108,9 @@ class IncidenciaRepository:
                 id_estado=body['incidencia'].get("id_estado"),
                 id_usuario=body['incidencia'].get("id_usuario"),
                 id_transportista=body['incidencia'].get("id_transportista"),
-                id_tipo_incidencia=body['incidencia'].get("id_tipo_incidencia")
+                id_tipo_incidencia=body['incidencia'].get("id_tipo_incidencia"),
+                valorizado=body['incidencia'].get("valorizado"),
+                total_item=body['incidencia'].get("total_item")
             )
 
             # Agregar y obtener el ID de la incidencia
@@ -301,45 +303,60 @@ class IncidenciaRepository:
     
     def actualizar_detalle(self, body: dict, db: Session):
         id_incidencia = body.get('incidencia')
-        detallex = body.get('detalles')
+        valorizado = body.get('valorizado')
+        total_item = body.get('total_item')
         try:
-            # Obtener todos los detalles actuales de la incidencia
-            detalles_actuales = db.query(Detalle).filter(Detalle.id_incidencia == id_incidencia, Detalle.estado == True).all()
-             # Crear un set de IDs actuales en la base de datos
-            ids_actuales = {detalle.id for detalle in detalles_actuales}
-            # Crear un set de IDs que vienen en el body
-            ids_nuevos = {detalle.get("id") for detalle in body['detalles'] if detalle.get("id")}
-            # Encontrar los IDs que deben ser eliminados (soft delete)
-            ids_a_eliminar = ids_actuales - ids_nuevos
-            # Eliminar los detalles marcados como eliminados (si los hay)
-            if ids_a_eliminar: # aplicamos soft delete
-                db.query(Detalle).filter(Detalle.id.in_(ids_a_eliminar)).update({Detalle.estado: False}, synchronize_session=False)
-            for detalle in body['detalles']:
-                # signfica que es nuevo
-                if not detalle.get("id"):
+            # Actualizar la incidencia
+            incidencia = db.query(Incidencia).filter(Incidencia.id == id_incidencia).first()
+            if incidencia:
+                incidencia.valorizado = valorizado
+                incidencia.total_item = total_item
+                detallex = body.get('detalles')
+                try:
+                    # Obtener todos los detalles actuales de la incidencia
+                    detalles_actuales = db.query(Detalle).filter(Detalle.id_incidencia == id_incidencia, Detalle.estado == True).all()
+                    # Crear un set de IDs actuales en la base de datos
+                    ids_actuales = {detalle.id for detalle in detalles_actuales}
+                    # Crear un set de IDs que vienen en el body
+                    ids_nuevos = {detalle.get("id") for detalle in body['detalles'] if detalle.get("id")}
+                    # Encontrar los IDs que deben ser eliminados (soft delete)
+                    ids_a_eliminar = ids_actuales - ids_nuevos
+                    # Eliminar los detalles marcados como eliminados (si los hay)
+                    if ids_a_eliminar: # aplicamos soft delete
+                        db.query(Detalle).filter(Detalle.id.in_(ids_a_eliminar)).update({Detalle.estado: False}, synchronize_session=False)
+                    for detalle in body['detalles']:
+                        # signfica que es nuevo
+                        if not detalle.get("id"):
 
-                    nuevo_detalle = Detalle(
-                        id_incidencia=id_incidencia,
-                        tipo_de_diferencia=detalle.get("tipoDiferencia"),
-                        sku_producto=detalle.get("sku"),
-                        nro_bulto=detalle.get("numBulto"),
-                        peso_origen=detalle.get("pesoOrigen"),
-                        peso_recepcion=detalle.get("pesoRecepcion"),
-                        cantidad=detalle.get("cantidad"),
-                        id_guia=detalle.get("numGuia")
-                    )
-                    print(nuevo_detalle)
-                    db.add(nuevo_detalle)
-                else:
-                    print(detalle)
-            #si todo salió bien, hacer commit a la bd
-            db.commit()
-            print(id_incidencia)
-            print(detallex)
+                            nuevo_detalle = Detalle(
+                                id_incidencia=id_incidencia,
+                                tipo_de_diferencia=detalle.get("tipoDiferencia"),
+                                sku_producto=detalle.get("sku"),
+                                nro_bulto=detalle.get("numBulto"),
+                                peso_origen=detalle.get("pesoOrigen"),
+                                peso_recepcion=detalle.get("pesoRecepcion"),
+                                cantidad=detalle.get("cantidad"),
+                                id_guia=detalle.get("numGuia")
+                            )
+                            print(nuevo_detalle)
+                            db.add(nuevo_detalle)
+                        else:
+                            print(detalle)
+                    #si todo salió bien, hacer commit a la bd
+                    db.commit()
+                    print(id_incidencia)
+                    print(detallex)
+                except Exception as e:
+                    # Si algo salió mal, hacer rollback
+                    db.rollback()
+                    print(f"Error creando detalle: {e}")
+                    return False
+
+                return id_incidencia
+            else:
+                raise HTTPException(status_code=404, detail="Incidencia no encontrada")
         except Exception as e:
-            # Si algo salió mal, hacer rollback
             db.rollback()
-            print(f"Error creando detalle: {e}")
-            return False
-
-        return id_incidencia
+            print(f"Error actualizando incidencia: {e}")
+            raise HTTPException(status_code=500, detail=str(e))
+        

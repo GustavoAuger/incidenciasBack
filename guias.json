@@ -5,11 +5,11 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-001",
     "sku_total": [
-      { "sku": "103206", "total": 2 },
-      { "sku": "103205", "total": 1 },
-      { "sku": "103207", "total": 1 },
-      { "sku": "103208", "total": 8 },
-      { "sku": "103209", "total": 6 }
+      { "sku": "103206", "total": 2, "precio": 10000},
+      { "sku": "103205", "total": 1, "precio": 12000},
+      { "sku": "103207", "total": 1, "precio": 13000},
+      { "sku": "103208", "total": 8, "precio": 14000},
+      { "sku": "103209", "total": 6, "precio": 15000}
     ]
   },
   {
@@ -18,11 +18,11 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-002",
     "sku_total": [
-      { "sku": "103208", "total": 2 },
-      { "sku": "103210", "total": 1 },
-      { "sku": "103211", "total": 4 },
-      { "sku": "103212", "total": 1 },
-      { "sku": "103213", "total": 1 }
+      { "sku": "103208", "total": 2, "precio": 10000},
+      { "sku": "103210", "total": 1, "precio": 12000},
+      { "sku": "103211", "total": 4, "precio": 13000},
+      { "sku": "103212", "total": 1, "precio": 14000},
+      { "sku": "103213", "total": 1, "precio": 15000}
     ]
   },
   {
@@ -31,10 +31,10 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-003",
     "sku_total": [
-      { "sku": "103205", "total": 3 },
-      { "sku": "103209", "total": 5 },
-      { "sku": "103211", "total": 2 },
-      { "sku": "103214", "total": 7 }
+      { "sku": "103205", "total": 3, "precio": 10000 },
+      { "sku": "103209", "total": 5, "precio": 12000 },
+      { "sku": "103211", "total": 2, "precio": 13000 },
+      { "sku": "103214", "total": 7, "precio": 14000 }
     ]
   },
   {
@@ -43,9 +43,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-004",
     "sku_total": [
-      { "sku": "103206", "total": 4 },
-      { "sku": "103210", "total": 3 },
-      { "sku": "103213", "total": 6 }
+      { "sku": "103206", "total": 4, "precio": 10000 },
+      { "sku": "103210", "total": 3, "precio": 12000 },
+      { "sku": "103213", "total": 6, "precio": 13000 }
     ]
   },
   {
@@ -54,9 +54,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-005",
     "sku_total": [
-      { "sku": "103207", "total": 5 },
-      { "sku": "103212", "total": 2 },
-      { "sku": "103215", "total": 4 }
+      { "sku": "103207", "total": 5, "precio": 10000 },
+      { "sku": "103212", "total": 2, "precio": 12000 },
+      { "sku": "103215", "total": 4, "precio": 13000 }
     ]
   },
   {
@@ -65,9 +65,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-006",
     "sku_total": [
-      { "sku": "103208", "total": 7 },
-      { "sku": "103211", "total": 3 },
-      { "sku": "103214", "total": 5 }
+      { "sku": "103208", "total": 7, "precio": 10000 },
+      { "sku": "103211", "total": 3, "precio": 12000 },
+      { "sku": "103214", "total": 5, "precio": 13000 }
     ]
   },
   {
@@ -76,9 +76,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-001",
     "sku_total": [
-      { "sku": "103209", "total": 4 },
-      { "sku": "103213", "total": 8 },
-      { "sku": "103215", "total": 2 }
+      { "sku": "103209", "total": 4, "precio": 18000 },
+      { "sku": "103213", "total": 8, "precio": 8000 },
+      { "sku": "103215", "total": 2, "precio": 5000 }
     ]
   },
   {
@@ -87,9 +87,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-002",
     "sku_total": [
-      { "sku": "103205", "total": 6 },
-      { "sku": "103210", "total": 4 },
-      { "sku": "103212", "total": 3 }
+      { "sku": "103205", "total": 6, "precio": 18000 },
+      { "sku": "103210", "total": 4, "precio": 8000  },
+      { "sku": "103212", "total": 3, "precio": 5000  }
     ]
   },
   {
@@ -98,9 +98,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-003",
     "sku_total": [
-      { "sku": "103206", "total": 5 },
-      { "sku": "103211", "total": 7 },
-      { "sku": "103214", "total": 2 }
+      { "sku": "103206", "total": 5, "precio": 18000 },
+      { "sku": "103211", "total": 7, "precio": 8000  },
+      { "sku": "103214", "total": 2, "precio": 5000  }
     ]
   },
   {
@@ -109,9 +109,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-004",
     "sku_total": [
-      { "sku": "103207", "total": 3 },
-      { "sku": "103213", "total": 5 },
-      { "sku": "103215", "total": 6 }
+      { "sku": "103207", "total": 3, "precio": 18000 },
+      { "sku": "103213", "total": 5, "precio": 8000  },
+      { "sku": "103215", "total": 6, "precio": 5000  }
     ]
   },
   {
@@ -120,9 +120,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-005",
     "sku_total": [
-      { "sku": "103208", "total": 4 },
-      { "sku": "103212", "total": 8 },
-      { "sku": "103214", "total": 3 }
+      { "sku": "103208", "total": 4, "precio": 18000 },
+      { "sku": "103212", "total": 8, "precio": 8000  },
+      { "sku": "103214", "total": 3, "precio": 5000  }
     ]
   },
   {
@@ -131,9 +131,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-006",
     "sku_total": [
-      { "sku": "103209", "total": 2 },
-      { "sku": "103211", "total": 6 },
-      { "sku": "103213", "total": 4 }
+      { "sku": "103209", "total": 2, "precio": 18000 },
+      { "sku": "103211", "total": 6, "precio": 8000  },
+      { "sku": "103213", "total": 4, "precio": 5000  }
     ]
   },
   {
@@ -142,9 +142,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-001",
     "sku_total": [
-      { "sku": "103205", "total": 7 },
-      { "sku": "103210", "total": 5 },
-      { "sku": "103215", "total": 3 }
+      { "sku": "103205", "total": 7, "precio": 18000 },
+      { "sku": "103210", "total": 5, "precio": 8000  },
+      { "sku": "103215", "total": 3, "precio": 5000  }
     ]
   },
   {
@@ -153,9 +153,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-002",
     "sku_total": [
-      { "sku": "103206", "total": 6 },
-      { "sku": "103212", "total": 4 },
-      { "sku": "103214", "total": 8 }
+      { "sku": "103206", "total": 6, "precio": 18000 },
+      { "sku": "103212", "total": 4, "precio": 8000  },
+      { "sku": "103214", "total": 8, "precio": 5000  }
     ]
   },
   {
@@ -164,9 +164,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-003",
     "sku_total": [
-      { "sku": "103207", "total": 2 },
-      { "sku": "103211", "total": 5 },
-      { "sku": "103213", "total": 7 }
+      { "sku": "103207", "total": 2, "precio": 18000 },
+      { "sku": "103211", "total": 5, "precio": 8000  },
+      { "sku": "103213", "total": 7, "precio": 5000  }
     ]
   },
   {
@@ -175,9 +175,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-004",
     "sku_total": [
-      { "sku": "103208", "total": 3 },
-      { "sku": "103210", "total": 8 },
-      { "sku": "103215", "total": 5 }
+      { "sku": "103208", "total": 3, "precio": 18000 },
+      { "sku": "103210", "total": 8, "precio": 8000  },
+      { "sku": "103215", "total": 5, "precio": 5000  }
     ]
   },
   {
@@ -186,9 +186,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-005",
     "sku_total": [
-      { "sku": "103209", "total": 4 },
-      { "sku": "103212", "total": 6 },
-      { "sku": "103214", "total": 2 }
+      { "sku": "103209", "total": 4, "precio": 18000 },
+      { "sku": "103212", "total": 6, "precio": 8000  },
+      { "sku": "103214", "total": 2, "precio": 5000  }
     ]
   },
   {
@@ -197,9 +197,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-006",
     "sku_total": [
-      { "sku": "103205", "total": 5 },
-      { "sku": "103211", "total": 3 },
-      { "sku": "103213", "total": 7 }
+      { "sku": "103205", "total": 5, "precio": 18000 },
+      { "sku": "103211", "total": 3, "precio": 8000  },
+      { "sku": "103213", "total": 7, "precio": 5000  }
     ]
   },
   {
@@ -208,9 +208,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-001",
     "sku_total": [
-      { "sku": "103206", "total": 8 },
-      { "sku": "103210", "total": 4 },
-      { "sku": "103215", "total": 6 }
+      { "sku": "103206", "total": 8, "precio": 18000 },
+      { "sku": "103210", "total": 4, "precio": 8000  },
+      { "sku": "103215", "total": 6, "precio": 5000  }
     ]
   },
   {
@@ -219,9 +219,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-020",
     "sku_total": [
-      { "sku": "103207", "total": 3 },
-      { "sku": "103212", "total": 7 },
-      { "sku": "103214", "total": 5 }
+      { "sku": "103207", "total": 3, "precio": 18000 },
+      { "sku": "103212", "total": 7, "precio": 8000  },
+      { "sku": "103214", "total": 5, "precio": 5000  }
     ]
   },
   {
@@ -230,9 +230,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-003",
     "sku_total": [
-      { "sku": "103208", "total": 6 },
-      { "sku": "103211", "total": 2 },
-      { "sku": "103213", "total": 4 }
+      { "sku": "103208", "total": 6, "precio": 18000 },
+      { "sku": "103211", "total": 2, "precio": 8000  },
+      { "sku": "103213", "total": 4, "precio": 5000  }
     ]
   },
   {
@@ -241,9 +241,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-004",
     "sku_total": [
-      { "sku": "103209", "total": 5 },
-      { "sku": "103210", "total": 7 },
-      { "sku": "103215", "total": 3 }
+      { "sku": "103209", "total": 5, "precio": 18000 },
+      { "sku": "103210", "total": 7, "precio": 8000  },
+      { "sku": "103215", "total": 3, "precio": 5000  }
     ]
   },
   {
@@ -252,9 +252,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-005",
     "sku_total": [
-      { "sku": "103205", "total": 4 },
-      { "sku": "103212", "total": 6 },
-      { "sku": "103214", "total": 8 }
+      { "sku": "103205", "total": 4, "precio": 18000 },
+      { "sku": "103212", "total": 6, "precio": 8000  },
+      { "sku": "103214", "total": 8, "precio": 5000  }
     ]
   },
   {
@@ -263,9 +263,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-006",
     "sku_total": [
-      { "sku": "103206", "total": 7 },
-      { "sku": "103211", "total": 5 },
-      { "sku": "103213", "total": 3 }
+      { "sku": "103206", "total": 7, "precio": 18000 },
+      { "sku": "103211", "total": 5, "precio": 8000  },
+      { "sku": "103213", "total": 3, "precio": 5000  }
     ]
   },
   {
@@ -274,9 +274,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-007",
     "sku_total": [
-      { "sku": "103207", "total": 2 },
-      { "sku": "103210", "total": 6 },
-      { "sku": "103215", "total": 4 }
+      { "sku": "103207", "total": 2, "precio": 18000 },
+      { "sku": "103210", "total": 6, "precio": 8000  },
+      { "sku": "103215", "total": 4, "precio": 5000  }
     ]
   },
   {
@@ -285,9 +285,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-008",
     "sku_total": [
-      { "sku": "103208", "total": 5 },
-      { "sku": "103212", "total": 3 },
-      { "sku": "103214", "total": 7 }
+      { "sku": "103208", "total": 5, "precio": 18000 },
+      { "sku": "103212", "total": 3, "precio": 8000  },
+      { "sku": "103214", "total": 7, "precio": 5000  }
     ]
   },
   {
@@ -296,9 +296,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-009",
     "sku_total": [
-      { "sku": "103209", "total": 8 },
-      { "sku": "103211", "total": 4 },
-      { "sku": "103213", "total": 6 }
+      { "sku": "103209", "total": 8, "precio": 18000 },
+      { "sku": "103211", "total": 4, "precio": 8000  },
+      { "sku": "103213", "total": 6, "precio": 5000  }
     ]
   },
   {
@@ -307,9 +307,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-010",
     "sku_total": [
-      { "sku": "103205", "total": 3 },
-      { "sku": "103210", "total": 7 },
-      { "sku": "103215", "total": 5 }
+      { "sku": "103205", "total": 3, "precio": 18000 },
+      { "sku": "103210", "total": 7, "precio": 8000  },
+      { "sku": "103215", "total": 5, "precio": 5000  }
     ]
   },
   {
@@ -318,9 +318,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-011",
     "sku_total": [
-      { "sku": "103206", "total": 6 },
-      { "sku": "103212", "total": 4 },
-      { "sku": "103214", "total": 2 }
+      { "sku": "103206", "total": 6, "precio": 18000 },
+      { "sku": "103212", "total": 4, "precio": 8000  },
+      { "sku": "103214", "total": 2, "precio": 5000  }
     ]
   },
   {
@@ -329,9 +329,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-012",
     "sku_total": [
-      { "sku": "103207", "total": 5 },
-      { "sku": "103211", "total": 8 },
-      { "sku": "103213", "total": 3 }
+      { "sku": "103207", "total": 5, "precio": 18000 },
+      { "sku": "103211", "total": 8, "precio": 8000  },
+      { "sku": "103213", "total": 3, "precio": 5000  }
     ]
   },
   {
@@ -340,9 +340,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-013",
     "sku_total": [
-      { "sku": "103208", "total": 4 },
-      { "sku": "103210", "total": 6 },
-      { "sku": "103215", "total": 7 }
+      { "sku": "103208", "total": 4, "precio": 18000 },
+      { "sku": "103210", "total": 6, "precio": 8000  },
+      { "sku": "103215", "total": 7, "precio": 5000  }
     ]
   },
   {
@@ -351,9 +351,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-014",
     "sku_total": [
-      { "sku": "103209", "total": 2 },
-      { "sku": "103212", "total": 5 },
-      { "sku": "103214", "total": 3 }
+      { "sku": "103209", "total": 2, "precio": 18000 },
+      { "sku": "103212", "total": 5, "precio": 8000  },
+      { "sku": "103214", "total": 3, "precio": 5000  }
     ]
   },
   {
@@ -362,9 +362,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-015",
     "sku_total": [
-      { "sku": "103205", "total": 7 },
-      { "sku": "103211", "total": 4 },
-      { "sku": "103213", "total": 6 }
+      { "sku": "103205", "total": 7, "precio": 18000 },
+      { "sku": "103211", "total": 4, "precio": 8000  },
+      { "sku": "103213", "total": 6, "precio": 5000  }
     ]
   },
   {
@@ -373,9 +373,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-016",
     "sku_total": [
-      { "sku": "103206", "total": 3 },
-      { "sku": "103210", "total": 8 },
-      { "sku": "103215", "total": 5 }
+      { "sku": "103206", "total": 3, "precio": 18000 },
+      { "sku": "103210", "total": 8, "precio": 8000  },
+      { "sku": "103215", "total": 5, "precio": 5000  }
     ]
   },
   {
@@ -384,9 +384,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-017",
     "sku_total": [
-      { "sku": "103207", "total": 6 },
-      { "sku": "103212", "total": 2 },
-      { "sku": "103214", "total": 4 }
+      { "sku": "103207", "total": 6, "precio": 18000 },
+      { "sku": "103212", "total": 2, "precio": 8000  },
+      { "sku": "103214", "total": 4, "precio": 5000  }
     ]
   },
   {
@@ -395,9 +395,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-018",
     "sku_total": [
-      { "sku": "103208", "total": 5 },
-      { "sku": "103211", "total": 7 },
-      { "sku": "103213", "total": 3 }
+      { "sku": "103208", "total": 5, "precio": 18000 },
+      { "sku": "103211", "total": 7, "precio": 8000  },
+      { "sku": "103213", "total": 3, "precio": 5000  }
     ]
   },
   {
@@ -406,9 +406,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-019",
     "sku_total": [
-      { "sku": "103209", "total": 4 },
-      { "sku": "103210", "total": 6 },
-      { "sku": "103215", "total": 8 }
+      { "sku": "103209", "total": 4, "precio": 18000 },
+      { "sku": "103210", "total": 6, "precio": 8000  },
+      { "sku": "103215", "total": 8, "precio": 5000  }
     ]
   },
   {
@@ -417,9 +417,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-020",
     "sku_total": [
-      { "sku": "103205", "total": 2 },
-      { "sku": "103212", "total": 5 },
-      { "sku": "103214", "total": 7 }
+      { "sku": "103205", "total": 2, "precio": 18000 },
+      { "sku": "103212", "total": 5, "precio": 8000  },
+      { "sku": "103214", "total": 7, "precio": 5000  }
     ]
   },
   {
@@ -428,9 +428,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-001",
     "sku_total": [
-      { "sku": "103206", "total": 3 },
-      { "sku": "103211", "total": 6 },
-      { "sku": "103213", "total": 4 }
+      { "sku": "103206", "total": 3, "precio": 18000 },
+      { "sku": "103211", "total": 6, "precio": 8000  },
+      { "sku": "103213", "total": 4, "precio": 5000  }
     ]
   },
   {
@@ -439,9 +439,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-002",
     "sku_total": [
-      { "sku": "103207", "total": 8 },
-      { "sku": "103210", "total": 5 },
-      { "sku": "103215", "total": 2 }
+      { "sku": "103207", "total": 8, "precio": 18000 },
+      { "sku": "103210", "total": 5, "precio": 8000  },
+      { "sku": "103215", "total": 2, "precio": 5000  }
     ]
   },
   {
@@ -450,9 +450,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-003",
     "sku_total": [
-      { "sku": "103208", "total": 4 },
-      { "sku": "103212", "total": 7 },
-      { "sku": "103214", "total": 6 }
+      { "sku": "103208", "total": 4, "precio": 18000 },
+      { "sku": "103212", "total": 7, "precio": 8000  },
+      { "sku": "103214", "total": 6, "precio": 5000  }
     ]
   },
   {
@@ -461,9 +461,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-004",
     "sku_total": [
-      { "sku": "103209", "total": 3 },
-      { "sku": "103211", "total": 5 },
-      { "sku": "103213", "total": 8 }
+      { "sku": "103209", "total": 3, "precio": 18000 },
+      { "sku": "103211", "total": 5, "precio": 8000  },
+      { "sku": "103213", "total": 8, "precio": 5000  }
     ]
   },
   {
@@ -472,9 +472,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-005",
     "sku_total": [
-      { "sku": "103205", "total": 6 },
-      { "sku": "103210", "total": 4 },
-      { "sku": "103215", "total": 7 }
+      { "sku": "103205", "total": 6, "precio": 18000 },
+      { "sku": "103210", "total": 4, "precio": 8000  },
+      { "sku": "103215", "total": 7, "precio": 5000  }
     ]
   },
   {
@@ -483,9 +483,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-006",
     "sku_total": [
-      { "sku": "103206", "total": 2 },
-      { "sku": "103212", "total": 8 },
-      { "sku": "103214", "total": 5 }
+      { "sku": "103206", "total": 2, "precio": 18000 },
+      { "sku": "103212", "total": 8, "precio": 8000  },
+      { "sku": "103214", "total": 5, "precio": 5000  }
     ]
   },
   {
@@ -494,9 +494,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-007",
     "sku_total": [
-      { "sku": "103207", "total": 3 },
-      { "sku": "103211", "total": 6 },
-      { "sku": "103213", "total": 4 }
+      { "sku": "103207", "total": 3, "precio": 18000 },
+      { "sku": "103211", "total": 6, "precio": 8000  },
+      { "sku": "103213", "total": 4, "precio": 5000  }
     ]
   },
   {
@@ -505,9 +505,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-008",
     "sku_total": [
-      { "sku": "103208", "total": 7 },
-      { "sku": "103210", "total": 5 },
-      { "sku": "103215", "total": 2 }
+      { "sku": "103208", "total": 7, "precio": 18000 },
+      { "sku": "103210", "total": 5, "precio": 8000  },
+      { "sku": "103215", "total": 2, "precio": 5000  }
     ]
   },
   {
@@ -516,9 +516,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-009",
     "sku_total": [
-      { "sku": "103209", "total": 4 },
-      { "sku": "103212", "total": 8 },
-      { "sku": "103214", "total": 6 }
+      { "sku": "103209", "total": 4, "precio": 18000 },
+      { "sku": "103212", "total": 8, "precio": 8000  },
+      { "sku": "103214", "total": 6, "precio": 5000  }
     ]
   },
   {
@@ -527,9 +527,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-010",
     "sku_total": [
-      { "sku": "103205", "total": 3 },
-      { "sku": "103211", "total": 7 },
-      { "sku": "103213", "total": 5 }
+      { "sku": "103205", "total": 3, "precio": 18000 },
+      { "sku": "103211", "total": 7, "precio": 8000  },
+      { "sku": "103213", "total": 5, "precio": 5000  }
     ]
   },
   {
@@ -538,9 +538,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-011",
     "sku_total": [
-      { "sku": "103206", "total": 6 },
-      { "sku": "103210", "total": 2 },
-      { "sku": "103215", "total": 4 }
+      { "sku": "103206", "total": 6, "precio": 18000 },
+      { "sku": "103210", "total": 2, "precio": 8000  },
+      { "sku": "103215", "total": 4, "precio": 5000  }
     ]
   },
   {
@@ -549,9 +549,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-012",
     "sku_total": [
-      { "sku": "103207", "total": 8 },
-      { "sku": "103212", "total": 5 },
-      { "sku": "103214", "total": 3 }
+      { "sku": "103207", "total": 8, "precio": 18000 },
+      { "sku": "103212", "total": 5, "precio": 8000  },
+      { "sku": "103214", "total": 3, "precio": 5000  }
     ]
   },
   {
@@ -560,9 +560,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-013",
     "sku_total": [
-      { "sku": "103208", "total": 4 },
-      { "sku": "103211", "total": 7 },
-      { "sku": "103213", "total": 6 }
+      { "sku": "103208", "total": 4, "precio": 18000 },
+      { "sku": "103211", "total": 7, "precio": 8000  },
+      { "sku": "103213", "total": 6, "precio": 5000  }
     ]
   },
   {
@@ -571,9 +571,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-014",
     "sku_total": [
-      { "sku": "103209", "total": 2 },
-      { "sku": "103210", "total": 5 },
-      { "sku": "103215", "total": 8 }
+      { "sku": "103209", "total": 2, "precio": 18000 },
+      { "sku": "103210", "total": 5, "precio": 8000  },
+      { "sku": "103215", "total": 8, "precio": 5000  }
     ]
   },
   {
@@ -582,9 +582,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-015",
     "sku_total": [
-      { "sku": "103205", "total": 3 },
-      { "sku": "103212", "total": 6 },
-      { "sku": "103214", "total": 4 }
+      { "sku": "103205", "total": 3, "precio": 18000 },
+      { "sku": "103212", "total": 6, "precio": 8000  },
+      { "sku": "103214", "total": 4, "precio": 5000  }
     ]
   },
   {
@@ -593,9 +593,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-016",
     "sku_total": [
-      { "sku": "103206", "total": 7 },
-      { "sku": "103211", "total": 5 },
-      { "sku": "103213", "total": 3 }
+      { "sku": "103206", "total": 7, "precio": 18000 },
+      { "sku": "103211", "total": 5, "precio": 8000  },
+      { "sku": "103213", "total": 3, "precio": 5000  }
     ]
   },
   {
@@ -604,9 +604,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-017",
     "sku_total": [
-      { "sku": "103207", "total": 2 },
-      { "sku": "103210", "total": 6 },
-      { "sku": "103215", "total": 4 }
+      { "sku": "103207", "total": 2, "precio": 18000 },
+      { "sku": "103210", "total": 6, "precio": 8000  },
+      { "sku": "103215", "total": 4, "precio": 5000  }
     ]
   },
   {
@@ -615,9 +615,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-018",
     "sku_total": [
-      { "sku": "103205", "total": 4 },
-      { "sku": "103208", "total": 7 },
-      { "sku": "103211", "total": 3 }
+      { "sku": "103205", "total": 4, "precio": 18000 },
+      { "sku": "103208", "total": 7, "precio": 8000  },
+      { "sku": "103211", "total": 3, "precio": 5000  }
     ]
   },
   {
@@ -626,9 +626,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-019",
     "sku_total": [
-      { "sku": "103206", "total": 5 },
-      { "sku": "103209", "total": 2 },
-      { "sku": "103213", "total": 8 }
+      { "sku": "103206", "total": 5, "precio": 18000 },
+      { "sku": "103209", "total": 2, "precio": 8000  },
+      { "sku": "103213", "total": 8, "precio": 5000  }
     ]
   },
   {
@@ -637,9 +637,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-020",
     "sku_total": [
-      { "sku": "103207", "total": 6 },
-      { "sku": "103210", "total": 3 },
-      { "sku": "103214", "total": 9 }
+      { "sku": "103207", "total": 6, "precio": 18000 },
+      { "sku": "103210", "total": 3, "precio": 8000  },
+      { "sku": "103214", "total": 9, "precio": 5000  }
     ]
   },
   {
@@ -648,9 +648,9 @@
     "id_bod_origen": "BC-001",
     "id_bod_destino": "LO-001",
     "sku_total": [
-      { "sku": "103205", "total": 5 },
-      { "sku": "103209", "total": 3 },
-      { "sku": "103212", "total": 7 }
+      { "sku": "103205", "total": 5, "precio": 18000 },
+      { "sku": "103209", "total": 3, "precio": 8000  },
+      { "sku": "103212", "total": 7, "precio": 5000  }
     ]
   }
 ]
