@@ -1,4 +1,5 @@
 from app.repositories.incidencia_repository import IncidenciaRepository
+from app.models import Incidencia
 import jwt
 import httpx
 
@@ -28,7 +29,12 @@ class IncidenciaService:
         return self.repository.actualizar_detalle(body, db)
 
     def correo(self, body, db):
-        id_bodega = body.get('id_bodega')
-        if not id_bodega:
-            raise HTTPException(status_code=400, detail="Se requiere el id_bodega")
-        return self.repository.enviar_correo_bodega(id_bodega)
+        incidencia = Incidencia(
+            id=body.get("id"),  # <-- simulado para pruebas postman
+            origen=body.get("origen"),
+            destino=body.get("destino"),
+            fecha_recepcion=body.get("fecha_recepcion"),
+            observaciones=body.get("observaciones")
+        )
+
+        return self.repository.enviar_correo_bodega(incidencia, db)

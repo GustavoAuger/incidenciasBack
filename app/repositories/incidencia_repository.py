@@ -10,6 +10,7 @@ from app.models import EstadoIncidencia
 from app.models import Incidencia
 from app.models import Detalle
 from app.models import Usuario
+from app.models import LogEnvioCorreo
 import os
 from supabase import create_client, Client
 from datetime import datetime
@@ -51,17 +52,36 @@ class IncidenciaRepository:
         estado = db.query(EstadoIncidencia).all()
         return estado
     
-    def enviar_correo_bodega(self, id_bodega: str) -> dict:
+    def enviar_correo_bodega(self, incidencia: Incidencia, db) -> dict:
+        correo_destino = None  # Asignar un valor por defecto a correo_destino
         try:
+
+            origen_id = str(incidencia.origen) # Convertir a string mocka api es string
+            print(origen_id)
+            destino_id = str(incidencia.destino) # Convertir a string mocka api es string
+            print(destino_id)
             # Obtener información de la bodega
-            response = requests.get(f"{self.bodegas_url}/{id_bodega}")
-            if response.status_code != 200:
+            origen_resp = requests.get(f"{self.bodegas_url}/{origen_id}")
+            if origen_resp.status_code != 200:
                 raise HTTPException(status_code=404, detail="Bodega no encontrada")
-                
-            bodega = response.json()
-            correo_destino = bodega.get('correo')
-            nombre_bodega = bodega.get('nombre_bodega')
+            origen_data = origen_resp.json()
+            print(origen_data)
             
+            destino_resp = requests.get(f"{self.bodegas_url}/{destino_id}")
+            if destino_resp.status_code != 200:
+                raise HTTPException(status_code=404, detail="Bodega de destino no encontrada")
+            destino_data = destino_resp.json()
+            
+            # Extraer correos y nombres
+            correo_destino = origen_data.get('correo')  # El correo es el de la bodega de origen
+            nombre_bodega_origen = origen_data.get('nombre_bodega', 'N/D')
+            nombre_bodega_destino = destino_data.get('nombre_bodega', 'N/D')
+            id_bodega_destino = destino_data.get('id_bodega', 'N/D')
+            id_incidencia = incidencia.id
+            print("id_incidencia: ",id_incidencia)
+            print("id_bodega_destino: ",id_bodega_destino)
+            print("nombre_bodega_origen: ",nombre_bodega_origen)
+            print("nombre_bodega_destino: ",nombre_bodega_destino)
             if not correo_destino:
                 raise HTTPException(status_code=400, detail="La bodega no tiene correo registrado")
             
@@ -74,14 +94,34 @@ class IncidenciaRepository:
             if not sender_email or not sender_password:
                 raise HTTPException(status_code=500, detail="Configuración de correo no disponible")
             
+
+            # Construir cuerpo HTML
+            body_html = f"""
+                <html>
+                <body>
+                    <p>Estimado/a, buenas tardes:</p> 
+                    <p>Se ha generado una nueva incidencia con los siguientes detalles:</p>
+
+                    <h3>Resumen de la Incidencia:</h3>
+                    <p><strong>Fecha de recepción de mercadería:</strong> {incidencia.fecha_recepcion}</p>
+                    <p><strong>Bodega de origen:</strong> {incidencia.origen} - {nombre_bodega_origen}</p>
+                    <p><strong>Bodega que levanta la incidencia:</strong> {incidencia.destino} - {nombre_bodega_destino}</p>
+                    <p><strong>Observaciones:</strong> {incidencia.observaciones or 'No registradas'}</p>
+
+                    <br>
+                    <p><em>Este correo fue enviado de manera automática. Por favor, no responda a este mensaje.</em></p>
+                    <p>Saludos cordiales,</p>
+                </body>
+                </html>
+            """
             # Crear mensaje
             message = MIMEMultipart()
             message["From"] = sender_email
             message["To"] = correo_destino
-            message["Subject"] = f"Nueva Incidencia Registrada - {nombre_bodega}"
+            message["Subject"] = f"Se ha generado la Incidencia Nº {id_incidencia} por la bodega {id_bodega_destino} {nombre_bodega_destino}"
             
-            body = f"Se ha registrado una nueva incidencia para la bodega {nombre_bodega}."
-            message.attach(MIMEText(body, "plain"))
+            # Adjuntar HTML al correo
+            message.attach(MIMEText(body_html, "html"))
             
             # Enviar correo
             with smtplib.SMTP(smtp_server, smtp_port) as server:
@@ -141,9 +181,8 @@ class IncidenciaRepository:
             db.commit()
             # Enviar correo a la bodega de origen
             try:
-                # llamamos directamente a la funcion
-                resultado = self.enviar_correo_bodega(body['incidencia'].get('id_bodega'))
-
+                # llamamos directamente a la funcion, le pasamos los datos de la incidencia
+                resultado = self.enviar_correo_bodega(nueva_incidencia)
                 # para ver si lo hizo
                 if resultado.get('message') == "Correo enviado exitosamente":
                     print("Correo enviado exitosamente.")

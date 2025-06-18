@@ -119,7 +119,7 @@ class LogEnvioCorreo(Base):
     id = Column(Integer, primary_key=True, index=True)
     correo_destinatario = Column(String(255), nullable=False)
     enviado = Column(Boolean, nullable=False)
-    fecha_envio = Column(TIMESTAMP, server_default="CURRENT_TIMESTAMP")
+    fecha_emision = Column(TIMESTAMP, server_default="CURRENT_TIMESTAMP")
 
 class GuiaRequest(BaseModel):
     guia_numero: str
