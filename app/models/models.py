@@ -113,6 +113,13 @@ class Reporte(Base):
     datos = Column(JSON, nullable=False)
     tipo_reporte = Column(String(30), nullable=False)
 
+class LogEnvioCorreo(Base):
+    __tablename__ = "log_envio_correo"
+
+    id = Column(Integer, primary_key=True, index=True)
+    correo_destinatario = Column(String(255), nullable=False)
+    enviado = Column(Boolean, nullable=False)
+    fecha_envio = Column(TIMESTAMP, server_default="CURRENT_TIMESTAMP")
 
 class GuiaRequest(BaseModel):
     guia_numero: str

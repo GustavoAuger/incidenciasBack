@@ -41,6 +41,7 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 class IncidenciaRepository:
     def __init__(self):
         self.bodegas_url = "https://680fe31d27f2fdac240fb759.mockapi.io/ged_id_bodega/bodega"
+        self.log_repo = LogCorreoRepository()  # inicializa el repositorio de logs
     
     def get_tipo_incidencia(self, db: Session):
         incidencias = db.query(TipoIncidencia).all()
@@ -87,13 +88,17 @@ class IncidenciaRepository:
                 server.starttls()
                 server.login(sender_email, sender_password)
                 server.send_message(message)
-            
+
+            self.log_repo.log_envio_correo(db, correo_destino, True)
             return {"message": "Correo enviado exitosamente"}
             
         except HTTPException as he:
+            self.log_repo.log_envio_correo(db, correo_destino, False)
             raise he
+
         except Exception as e:
             print(f"Error enviando correo: {e}")
+            self.log_repo.log_envio_correo(db, correo_destino, False)
             raise HTTPException(status_code=500, detail=str(e))
 
     def create_incidencia(self, body: dict, db: Session):
@@ -143,12 +148,18 @@ class IncidenciaRepository:
                 if resultado.get('message') == "Correo enviado exitosamente":
                     print("Correo enviado exitosamente.")
                 else:
-                    print(f"Error al enviar correo: {resultado.get('message')}")
+                    return { #si no lo envó correctamente se corta el metodo y se devuelve el mensaje
+                    "mensaje": "Incidencia N°:"+id_incidencia+ ",creada con éxito. Correo no enviado."
+                    }
 
-            except Exception as e:
-                print(f"Error enviando correo: {e}")
+            except Exception as e: # si hubo un error en la se corta el metodo y se devuelve el mensaje
+                return {
+                "mensaje": "Incidencia N°:"+id_incidencia+ ",creada con éxito. Correo no enviado."
+                }
 
-            return id_incidencia
+            return { # si todo salió bien se devuelve el mensaje de que se creo correctamente y que se envio el correo
+                "mensaje": "Incidencia N°:"+id_incidencia+ ",creada con éxito. Correo enviado correctamente."
+                }
 
         except Exception as e:
             # Si algo salió mal, hacer rollback
@@ -359,4 +370,14 @@ class IncidenciaRepository:
             db.rollback()
             print(f"Error actualizando incidencia: {e}")
             raise HTTPException(status_code=500, detail=str(e))
-        
+
+class LogCorreoRepository:
+    def log_envio_correo(self, db: Session, correo_destinatario: str, enviado: bool):
+        log = LogEnvioCorreo(
+            correo_destinatario=correo_destinatario,
+            enviado=enviado
+        )
+        db.add(log)
+        db.commit()
+        db.refresh(log)
+        return log
