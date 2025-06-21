@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, UploadFile, File
 from sqlalchemy.orm import Session
 from db.session import get_db  
 from app.models import Usuario
@@ -120,3 +120,10 @@ async def actualizar_detalle(body: dict, db: Session = Depends(get_db)):
 @router.post("/correo")
 async def enviar_correo(body: dict, db: Session = Depends(get_db)):
     return _incidenciaService.correo(body, db)
+
+@router.post("/upload-image")
+async def upload_image(
+    file: UploadFile = File(...), 
+    db: Session = Depends(get_db)
+):
+    return _incidenciaService.subir_imagen(file, db)

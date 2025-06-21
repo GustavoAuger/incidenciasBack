@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from fastapi import UploadFile
+from fastapi import UploadFile, HTTPException
 from sqlalchemy.orm import Session
 from typing import Optional
 from fastapi import HTTPException
@@ -33,8 +33,9 @@ load_dotenv()
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 SUPABASE_BUCKET = os.getenv("SUPABASE_BUCKET")
+SUPABASE_SERVICE_ROLE_KEY = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
 
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
 
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -188,16 +189,16 @@ class IncidenciaRepository:
                     print("Correo enviado exitosamente.")
                 else:
                     return { #si no lo envó correctamente se corta el metodo y se devuelve el mensaje
-                    "mensaje": "Incidencia N°:"+id_incidencia+ ",creada con éxito. Correo no enviado."
+                    "mensaje": "Incidencia N°:"+str(id_incidencia)+ ",creada con éxito. Correo no enviado."
                     }
 
             except Exception as e: # si hubo un error en la se corta el metodo y se devuelve el mensaje
                 return {
-                "mensaje": "Incidencia N°:"+id_incidencia+ ",creada con éxito. Correo no enviado."
+                "mensaje": "Incidencia N°:"+str(id_incidencia)+ ",creada con éxito. Correo no enviado."
                 }
 
             return { # si todo salió bien se devuelve el mensaje de que se creo correctamente y que se envio el correo
-                "mensaje": "Incidencia N°:"+id_incidencia+ ",creada con éxito. Correo enviado correctamente."
+                "mensaje": "Incidencia N°:"+str(id_incidencia)+ ",creada con éxito. Correo enviado correctamente."
                 }
 
         except Exception as e:
@@ -236,7 +237,7 @@ class IncidenciaRepository:
             return False
 
 
-    def upload_image_to_supabase(file, filename_prefix="detalle"): #se consume en la función de arriba si es que se carga imagen
+    def upload_image_to_supabase(self, file, db=None, filename_prefix="detalle"): #se consume en la función de arriba si es que se carga imagen
         
         try:
             now = datetime.utcnow().strftime("%Y%m%d%H%M%S")

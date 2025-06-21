@@ -1,5 +1,7 @@
 from app.repositories.incidencia_repository import IncidenciaRepository
+from sqlalchemy.orm import Session
 from app.models import Incidencia
+from fastapi import UploadFile, HTTPException
 import jwt
 import httpx
 
@@ -38,3 +40,11 @@ class IncidenciaService:
         )
 
         return self.repository.enviar_correo_bodega(incidencia, db)
+    
+    def subir_imagen(self, file: UploadFile, db: Session) -> dict:
+        """Sube una imagen a Supabase y devuelve la URL pública."""
+        url = self.repository.upload_image_to_supabase(file, db)
+        if not url:
+            # Lanza excepción para que FastAPI devuelva 500 y sea consistente
+            raise HTTPException(status_code=500, detail="Error al subir la imagen")
+        return {"success": True, "url": url}
