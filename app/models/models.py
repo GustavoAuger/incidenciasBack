@@ -67,7 +67,7 @@ class Incidencia(Base):
     id_usuario = Column(Integer, ForeignKey("usuario.id", ondelete="SET NULL"), nullable=False)
     id_transportista = Column(Integer, ForeignKey("transportista.id", ondelete="SET NULL"), nullable=False)
     id_tipo_incidencia = Column(Integer, ForeignKey("tipo_incidencia.id", ondelete="RESTRICT"), nullable=False)
-    ruta_storage = Column(Text, nullable=True)   
+    ruta = Column(Text, nullable=True)   
     transportista = relationship("Transportista")
     estado = relationship("EstadoIncidencia", back_populates="incidencias")
 # Tabla ESTADO_TRANSPORTISTA

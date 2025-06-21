@@ -53,7 +53,8 @@ class IncidenciaRepository:
         estado = db.query(EstadoIncidencia).all()
         return estado
     
-    def enviar_correo_bodega(self, incidencia: Incidencia, db) -> dict:
+    def enviar_correo_bodega(self, incidencia: Incidencia) -> dict:
+    #def enviar_correo_bodega(self, incidencia: Incidencia, db) -> dict:
         correo_destino = None  # Asignar un valor por defecto a correo_destino
         try:
 
@@ -130,16 +131,19 @@ class IncidenciaRepository:
                 server.login(sender_email, sender_password)
                 server.send_message(message)
 
-            self.log_repo.log_envio_correo(db, correo_destino, True)
+           # self.log_repo.log_envio_correo(db, correo_destino, True)
+            self.log_repo.log_envio_correo(correo_destino, True)
             return {"message": "Correo enviado exitosamente"}
             
         except HTTPException as he:
-            self.log_repo.log_envio_correo(db, correo_destino, False)
+          #  self.log_repo.log_envio_correo(db, correo_destino, False)
+            self.log_repo.log_envio_correo(correo_destino, False)
             raise he
 
         except Exception as e:
             print(f"Error enviando correo: {e}")
-            self.log_repo.log_envio_correo(db, correo_destino, False)
+           # self.log_repo.log_envio_correo(db, correo_destino, False)
+            self.log_repo.log_envio_correo(correo_destino, False)
             raise HTTPException(status_code=500, detail=str(e))
 
     def create_incidencia(self, body: dict, db: Session):
@@ -413,7 +417,8 @@ class IncidenciaRepository:
             raise HTTPException(status_code=500, detail=str(e))
 
 class LogCorreoRepository:
-    def log_envio_correo(self, db: Session, correo_destinatario: str, enviado: bool):
+    #def log_envio_correo(self, db: Session, correo_destinatario: str, enviado: bool):
+    def log_envio_correo(self, correo_destinatario: str, enviado: bool):
         log = LogEnvioCorreo(
             correo_destinatario=correo_destinatario,
             enviado=enviado
