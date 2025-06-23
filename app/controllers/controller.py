@@ -1,4 +1,5 @@
-from fastapi import APIRouter, HTTPException, Depends, UploadFile, File
+from fastapi import APIRouter, HTTPException, Depends, UploadFile, File, Form
+from typing import Optional
 from sqlalchemy.orm import Session
 from db.session import get_db  
 from app.models import Usuario
@@ -67,9 +68,15 @@ async def get_tipo_incidencia(db: Session = Depends(get_db)):
     return success
 
 @router.post("/createIncidencia")
-async  def create_user(body: dict, db: Session = Depends(get_db)):
-    success = _incidenciaService.create_incidencia(body, db)
-    return success
+async def create_incidencia(
+    body: str = Form(...),
+    file: Optional[UploadFile] = File(None),
+    db: Session = Depends(get_db)
+):
+    # Convertir el body de string a dict
+    import json
+    body_dict = json.loads(body)
+    return _incidenciaService.create_incidencia(body_dict, db, file)
 
 @router.get("/getTransportistas")
 async def get_transportistas(db: Session = Depends(get_db)):

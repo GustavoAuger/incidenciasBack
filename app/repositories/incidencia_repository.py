@@ -146,7 +146,15 @@ class IncidenciaRepository:
             self.log_repo.log_envio_correo(correo_destino, False)
             raise HTTPException(status_code=500, detail=str(e))
 
-    def create_incidencia(self, body: dict, db: Session):
+    def create_incidencia(self, body: dict, db: Session, file: Optional[UploadFile] = None):
+        ruta_storage = None
+        # Verificar si recibimos el archivo y sus propiedades
+        if file:
+            print(f"Recibido archivo: {file.filename}")
+            print(f"Tipo de contenido: {file.content_type}")
+            print(f"Tamaño: {file.size} bytes")
+            # Si recibimos imagen, la subimos
+            ruta_storage = self.upload_image_to_supabase(file)
         try:
             # Crear la incidencia principal
             nueva_incidencia = Incidencia(
@@ -160,7 +168,8 @@ class IncidenciaRepository:
                 id_transportista=body['incidencia'].get("id_transportista"),
                 id_tipo_incidencia=body['incidencia'].get("id_tipo_incidencia"),
                 valorizado=body['incidencia'].get("valorizado"),
-                total_item=body['incidencia'].get("total_item")
+                total_item=body['incidencia'].get("total_item"),
+                ruta=ruta_storage
             )
 
             # Agregar y obtener el ID de la incidencia
@@ -181,71 +190,53 @@ class IncidenciaRepository:
                     id_guia=detalle.get("numGuia")
                 )
                 db.add(nuevo_detalle)
-
-            # Si todo salió bien, hacer commit de la transacción
-            db.commit()
-            # Enviar correo a la bodega de origen
-            try:
-                # llamamos directamente a la funcion, le pasamos los datos de la incidencia
-                resultado = self.enviar_correo_bodega(nueva_incidencia)
-                # para ver si lo hizo
-                if resultado.get('message') == "Correo enviado exitosamente":
-                    print("Correo enviado exitosamente.")
-                else:
-                    return { #si no lo envó correctamente se corta el metodo y se devuelve el mensaje
-                    "mensaje": "Incidencia N°:"+str(id_incidencia)+ ",creada con éxito. Correo no enviado."
-                    }
-
-            except Exception as e: # si hubo un error en la se corta el metodo y se devuelve el mensaje
-                return {
-                "mensaje": "Incidencia N°:"+str(id_incidencia)+ ",creada con éxito. Correo no enviado."
-                }
-
-            return { # si todo salió bien se devuelve el mensaje de que se creo correctamente y que se envio el correo
-                "mensaje": "Incidencia N°:"+str(id_incidencia)+ ",creada con éxito. Correo enviado correctamente."
-                }
-
+                
         except Exception as e:
             # Si algo salió mal, hacer rollback
             db.rollback()
             print(f"Error creando incidencia y detalles: {e}")
+            # Eliminar la imagen subida si existe
+            if ruta_storage:
+                try:
+                    supabase.storage.from_(SUPABASE_BUCKET).remove([ruta_storage])
+                    print(f"Imagen eliminada de Supabase: {ruta_storage}")
+                except Exception as delete_error:
+                    print(f"Error eliminando imagen: {delete_error}")
             raise HTTPException(status_code=500, detail=str(e))
-#no borrar esto pues es cuando cargaba imagen, se usara despues como referencia para la ruta
-    def create_detalle(self, body: dict, db: Session, file: Optional[UploadFile] = None):
-        ruta_storage = None
-
-        # Si recibimos imagen, la subimos
-        if file:
-            ruta_storage = upload_image_to_supabase(file)
-
-        nuevo_detalle = Detalle(
-            id_incidencia=body.get("id_incidencia"),
-            tipo_de_diferencia=body.get("tipo_de_diferencia"),
-            sku_producto=body.get("sku_producto"),
-            nro_bulto=body.get("nro_bulto"),
-            peso_origen=body.get("peso_origen"),
-            peso_recepcion=body.get("peso_recepcion"),
-            cantidad=body.get("cantidad"),
-            id_guia=body.get("id_guia"),
-            ruta_storage=ruta_storage  # Se asigna si hubo imagen
-        )
-
+        # Si todo salió bien, hacer commit de la transacción
+        db.commit()
+        # Enviar correo a la bodega de origen
         try:
-            db.add(nuevo_detalle)
-            db.commit()
-            db.refresh(nuevo_detalle)
-            return True
-        except Exception as e:
-            db.rollback()
-            print(f"Error creando detalle: {e}")
-            return False
+            # llamamos directamente a la funcion, le pasamos los datos de la incidencia
+            resultado = self.enviar_correo_bodega(nueva_incidencia)
+            # para ver si lo hizo
+            if resultado.get('message') == "Correo enviado exitosamente":
+                print("Correo enviado exitosamente.")
+            else:
+                return { #si no lo envó correctamente se corta el metodo y se devuelve el mensaje
+                "mensaje": "Incidencia N°:"+str(id_incidencia)+ ",creada con éxito. Correo no enviado."
+                }
+
+        except Exception as e: # si hubo un error en la se corta el metodo y se devuelve el mensaje
+                return {
+                "mensaje": "Incidencia N°:"+str(id_incidencia)+ ",creada con éxito. Correo no enviado."
+                }
+
+        return { # si todo salió bien se devuelve el mensaje de que se creo correctamente y que se envio el correo
+            "mensaje": "Incidencia N°:"+str(id_incidencia)+ ",creada con éxito. Correo enviado correctamente."
+            }
 
 
-    def upload_image_to_supabase(self, file, db=None, filename_prefix="detalle"): #se consume en la función de arriba si es que se carga imagen
-        
+
+    def upload_image_to_supabase(self, file, db=None, filename_prefix="detalle"):
         try:
             now = datetime.utcnow().strftime("%Y%m%d%H%M%S")
+            # Limpiar el nombre del archivo
             filename = f"{filename_prefix}_{now}_{file.filename}"
+            # Remover caracteres especiales y espacios
+            filename = filename.replace(" ", "_").replace(":", "_").replace(",", "_").replace("?", "_")
+            # Remplazar caracteres especiales con codificación URL
+            filename = filename.encode('ascii', 'ignore').decode('ascii')
             path_in_bucket = f"{filename}"
 
             file_bytes = file.file.read()  # Leer contenido binario

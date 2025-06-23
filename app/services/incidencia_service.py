@@ -2,6 +2,7 @@ from app.repositories.incidencia_repository import IncidenciaRepository
 from sqlalchemy.orm import Session
 from app.models import Incidencia
 from fastapi import UploadFile, HTTPException
+from typing import Optional
 import jwt
 import httpx
 
@@ -15,8 +16,8 @@ class IncidenciaService:
     def get_estado_incidencia(self, db):
         return self.repository.get_estado_incidencia(db)
 
-    def create_incidencia(self, body, db):
-        return self.repository.create_incidencia(body, db)
+    def create_incidencia(self, body, db, file: Optional[UploadFile] = None):
+        return self.repository.create_incidencia(body, db, file)
     
     def create_detalle(self, body, db):
         return self.repository.create_detalle(body, db)
