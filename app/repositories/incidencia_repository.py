@@ -416,6 +416,18 @@ class IncidenciaRepository:
             print(f"Error actualizando incidencia: {e}")
             raise HTTPException(status_code=500, detail=str(e))
 
+    def update_estado_incidencia(self, body, db):
+        try:
+            db.query(Incidencia).filter(Incidencia.id == body['id_incidencia']).update({
+                'id_estado': body['id_estado']
+            })
+            db.commit()
+            return True
+        except Exception as e:
+            db.rollback()
+            print(f"Error actualizando estado de la incidencia: {e}")
+            return False
+
 class LogCorreoRepository:
     #def log_envio_correo(self, db: Session, correo_destinatario: str, enviado: bool):
     def log_envio_correo(self, correo_destinatario: str, enviado: bool):
@@ -427,3 +439,6 @@ class LogCorreoRepository:
         db.commit()
         db.refresh(log)
         return log
+
+    
+        

@@ -48,3 +48,6 @@ class IncidenciaService:
             # Lanza excepción para que FastAPI devuelva 500 y sea consistente
             raise HTTPException(status_code=500, detail="Error al subir la imagen")
         return {"success": True, "url": url}
+
+    def update_estado_incidencia(self, body, db):
+        return self.repository.update_estado_incidencia(body, db)

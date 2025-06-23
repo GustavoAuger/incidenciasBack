@@ -127,3 +127,8 @@ async def upload_image(
     db: Session = Depends(get_db)
 ):
     return _incidenciaService.subir_imagen(file, db)
+
+@router.post("/update-estado-incidencia")
+async def update_estado_incidencia(body: dict, db: Session = Depends(get_db)):
+    return _incidenciaService.update_estado_incidencia(body, db)
+
