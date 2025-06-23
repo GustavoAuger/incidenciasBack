@@ -12,7 +12,8 @@ class ExternalRepository:
     def __init__(self):
         self.bodegas_url = "https://680fe31d27f2fdac240fb759.mockapi.io/ged_id_bodega/bodega"
         self.producto_url = "https://680fe31d27f2fdac240fb759.mockapi.io/ged_id_bodega/productos"
-        self.guia_url = "https://672258a92108960b9cc41077.mockapi.io/api/guias/guia"  
+        self.guia_url = "https://672258a92108960b9cc41077.mockapi.io/api/guias/guia" 
+        self.movimientos_url = "https://672258a92108960b9cc41077.mockapi.io/api/guias/movimientos"  
     
     def get_bodegas(self, db: Session):
         response = requests.get(self.bodegas_url)
@@ -57,3 +58,13 @@ class ExternalRepository:
         except requests.exceptions.RequestException as e:
             print(f"Error al obtener guía {guia_numero} desde la mock API: {e}")
             return []
+
+    def post_movimientos(self, body: dict, db: Session):
+        try:
+            response = requests.post(self.movimientos_url, json=body)
+            print(f"Respuesta del servidor: {response.status_code}")
+            # si recive un 200 o 201 es exitoso retorna true    
+            return response.status_code in [200, 201]
+        except requests.exceptions.RequestException as e:
+            print(f"Error en la petición: {str(e)}")
+            return False

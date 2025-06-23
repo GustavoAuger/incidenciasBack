@@ -402,6 +402,7 @@ class IncidenciaRepository:
                 'id_estado': body['id_estado']
             })
             db.commit()
+            print("Incidencia actualizada exitosamente")
             return True
         except Exception as e:
             db.rollback()

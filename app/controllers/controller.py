@@ -139,3 +139,6 @@ async def upload_image(
 async def update_estado_incidencia(body: dict, db: Session = Depends(get_db)):
     return _incidenciaService.update_estado_incidencia(body, db)
 
+@router.post("/post-movimientos")
+async def post_movimientos(body: dict, db: Session = Depends(get_db)):
+    return _externalService.post_movimientos(body, db)
