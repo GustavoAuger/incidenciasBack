@@ -53,8 +53,7 @@ class IncidenciaRepository:
         estado = db.query(EstadoIncidencia).all()
         return estado
     
-    def enviar_correo_bodega(self, incidencia: Incidencia) -> dict:
-    #def enviar_correo_bodega(self, incidencia: Incidencia, db) -> dict:
+    def enviar_correo_bodega(self, incidencia: Incidencia):
         correo_destino = None  # Asignar un valor por defecto a correo_destino
         try:
 
@@ -131,19 +130,13 @@ class IncidenciaRepository:
                 server.login(sender_email, sender_password)
                 server.send_message(message)
 
-           # self.log_repo.log_envio_correo(db, correo_destino, True)
-            self.log_repo.log_envio_correo(correo_destino, True)
-            return {"message": "Correo enviado exitosamente"}
+            return correo_destino
             
         except HTTPException as he:
-          #  self.log_repo.log_envio_correo(db, correo_destino, False)
-            self.log_repo.log_envio_correo(correo_destino, False)
             raise he
 
         except Exception as e:
             print(f"Error enviando correo: {e}")
-           # self.log_repo.log_envio_correo(db, correo_destino, False)
-            self.log_repo.log_envio_correo(correo_destino, False)
             raise HTTPException(status_code=500, detail=str(e))
 
     def create_incidencia(self, body: dict, db: Session, file: Optional[UploadFile] = None):
@@ -208,23 +201,19 @@ class IncidenciaRepository:
         # Enviar correo a la bodega de origen
         try:
             # llamamos directamente a la funcion, le pasamos los datos de la incidencia
-            resultado = self.enviar_correo_bodega(nueva_incidencia)
-            # para ver si lo hizo
-            if resultado.get('message') == "Correo enviado exitosamente":
-                print("Correo enviado exitosamente.")
+            correo_destino = self.enviar_correo_bodega(nueva_incidencia)
+            print(correo_destino)
+            # Registrar el envío del correo
+            if correo_destino:
+                self.log_repo.log_envio_correo(db, correo_destino, True)
+                return {"mensaje": "Incidencia N°:"+str(id_incidencia)+ ",creada con éxito. Correo enviado correctamente."}
             else:
-                return { #si no lo envó correctamente se corta el metodo y se devuelve el mensaje
-                "mensaje": "Incidencia N°:"+str(id_incidencia)+ ",creada con éxito. Correo no enviado."
-                }
+                self.log_repo.log_envio_correo(db, correo_destino, False)
+                return {"mensaje": "Incidencia N°:"+str(id_incidencia)+ ",creada con éxito. Correo no enviado."}
 
-        except Exception as e: # si hubo un error en la se corta el metodo y se devuelve el mensaje
-                return {
-                "mensaje": "Incidencia N°:"+str(id_incidencia)+ ",creada con éxito. Correo no enviado."
-                }
-
-        return { # si todo salió bien se devuelve el mensaje de que se creo correctamente y que se envio el correo
-            "mensaje": "Incidencia N°:"+str(id_incidencia)+ ",creada con éxito. Correo enviado correctamente."
-            }
+        except Exception as e:
+            self.log_repo.log_envio_correo(db, correo_destino, False)
+            return {"mensaje": "Incidencia N°:"+str(id_incidencia)+ ",creada con éxito. Correo no enviado."}
 
 
 
@@ -421,7 +410,7 @@ class IncidenciaRepository:
 
 class LogCorreoRepository:
     #def log_envio_correo(self, db: Session, correo_destinatario: str, enviado: bool):
-    def log_envio_correo(self, correo_destinatario: str, enviado: bool):
+    def log_envio_correo(self, db: Session, correo_destinatario: str, enviado: bool):
         log = LogEnvioCorreo(
             correo_destinatario=correo_destinatario,
             enviado=enviado
