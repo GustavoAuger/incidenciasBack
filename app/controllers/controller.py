@@ -10,12 +10,15 @@ from app.services.incidencia_service import IncidenciaService
 from app.services.external_service import ExternalService
 from app.services.transportista_service import TransportistaService
 from app.models.models import GuiaRequest # Importa el nuevo modelo
+from app.services.reclamo_service import ReclamoService
+from app.models.models import ReclamoTransportista as ReclamoTransportistaModel, ReclamoTransportistaCreate, ReclamoTransportistaResponse
 
 router = APIRouter()
 _userService = UserService()
 _externalService = ExternalService()
 _incidenciaService = IncidenciaService()
 _trasportistaService = TransportistaService()
+_reclamoService = ReclamoService()
 
 
 @router.post("/validateLogin")
@@ -142,3 +145,19 @@ async def update_estado_incidencia(body: dict, db: Session = Depends(get_db)):
 @router.post("/post-movimientos")
 async def post_movimientos(body: dict, db: Session = Depends(get_db)):
     return _externalService.post_movimientos(body, db)
+    
+@router.get("/getEstadosReclamo")
+async def get_estados_reclamo(db: Session = Depends(get_db)):
+    return _reclamoService.get_estados_reclamo(db)
+
+@router.get("/getReclamosTransportista")
+async def get_reclamos(db: Session = Depends(get_db)):
+    return _reclamoService.get_reclamos(db)
+
+@router.post("/createReclamoTransportista")
+async def create_reclamo_transportista(reclamo: ReclamoTransportistaCreate, db: Session = Depends(get_db)):
+    return _reclamoService.create_reclamo_transportista(reclamo, db)
+
+@router.put("/updateReclamoTransportista")
+async def update_reclamo_transportista(reclamo: ReclamoTransportistaResponse, db: Session = Depends(get_db)):
+    return _reclamoService.update_reclamo_transportista(reclamo, db)

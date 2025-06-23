@@ -1,7 +1,8 @@
 from sqlalchemy import Column, Integer, String, Text, ForeignKey, Boolean, Date, Numeric, TIMESTAMP, JSON
 from sqlalchemy.orm import relationship
 from db.session import Base
-from pydantic import BaseModel
+from pydantic import BaseModel, field_serializer
+from datetime import datetime
 
 # Tabla ROL
 class Rol(Base):
@@ -86,7 +87,7 @@ class ReclamoTransportista(Base):
     monto_pagado = Column(Numeric(10, 2))
     fdr = Column(Text)
     fecha_reclamo = Column(TIMESTAMP, server_default="CURRENT_TIMESTAMP")
-    observacion = Column(Text)
+    observacion = Column(Text, nullable=True)
     id_estado = Column(Integer, ForeignKey("estado_transportista.id", ondelete="RESTRICT"), nullable=False)
 
 # Tabla DETALLE
@@ -123,3 +124,30 @@ class LogEnvioCorreo(Base):
 
 class GuiaRequest(BaseModel):
     guia_numero: str
+
+# Modelos Pydantic para ReclamoTransportista
+class ReclamoTransportistaBase(BaseModel):
+    id_incidencia: int
+    monto_pagado: float | None = None
+    fdr: str | None = None
+    fecha_reclamo: datetime | None = None
+    observacion: str | None = None
+    id_estado: int
+
+class ReclamoTransportistaCreate(ReclamoTransportistaBase):
+    pass
+
+class ReclamoTransportistaResponse(ReclamoTransportistaBase):
+    id: int
+    
+    @field_serializer('fecha_reclamo')
+    def serialize_dt(self, dt: datetime | None, _info):
+        if dt is None:
+            return None
+        return dt.isoformat()
+    
+    class Config:
+        from_attributes = True
+        json_encoders = {
+            datetime: lambda v: v.isoformat() if v else None
+        }
