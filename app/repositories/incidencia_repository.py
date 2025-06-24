@@ -298,7 +298,8 @@ class IncidenciaRepository:
                 "id_usuario": incidencia.id_usuario,
                 "id_tipo_incidencia": incidencia.id_tipo_incidencia,
                 "valorizado": incidencia.valorizado,
-                "total_item": incidencia.total_item
+                "total_item": incidencia.total_item,
+                "ruta": incidencia.ruta
             })
 
         return result
