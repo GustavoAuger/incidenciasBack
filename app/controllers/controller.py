@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Depends, UploadFile, File, Form
+from fastapi import APIRouter, HTTPException, Depends, UploadFile, File, Form, Request
 from typing import Optional
 from sqlalchemy.orm import Session
 from db.session import get_db  
@@ -127,9 +127,15 @@ async def get_IdBodegaUser(db: Session = Depends(get_db)):
 async def actualizar_detalle(body: dict, db: Session = Depends(get_db)):
     return _incidenciaService.actualizar_detalle(body, db)
 
-@router.post("/correo")
-async def enviar_correo(body: dict, db: Session = Depends(get_db)):
-    return _incidenciaService.correo(body, db)
+@router.post("/enviar_correo_bodega2")
+async def enviar_correo_bodega2(request: Request, db: Session = Depends(get_db)):
+    try:
+        body = await request.json()
+        print(f"Body recibido: {body}")
+        return _incidenciaService.correo2(body, db)
+    except Exception as e:
+        print(f"Error procesando la solicitud: {str(e)}")
+        raise HTTPException(status_code=400, detail=str(e))
 
 @router.post("/upload-image")
 async def upload_image(

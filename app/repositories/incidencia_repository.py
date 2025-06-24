@@ -410,6 +410,92 @@ class IncidenciaRepository:
             print(f"Error actualizando estado de la incidencia: {e}")
             return False
 
+    def enviar_correo_bodega2(self, body:dict, db): # enviar correo a cuando se resuelve una incidencia
+        correo_destino = None  # Asignar un valor por defecto a correo_destino
+        try:
+            print(f"Datos recibidos: {body}")  # Log completo del body recibido
+            
+            # Extraer los datos de la incidencia
+            incidencia = body.get('incidencia', {})
+            print(f"Datos de incidencia: {incidencia}")
+            
+            # Obtener los valores necesarios
+            id_incidencia = incidencia.get('id')
+            destino_id = str(incidencia.get('d_id_bodega'))
+            fecha_recepcion = incidencia.get('fecha_recepcion')
+            observaciones = incidencia.get('observaciones')
+            id_estado = incidencia.get('id_estado')
+            print(f"Valores extraídos: id={id_incidencia}, destino={destino_id}, estado={id_estado}")
+            nombre_tipo_estado = 'Aceptado' if id_estado == 4 else 'Denegado' if id_estado == 3 else 'Anulado' if id_estado == 5 else 'En revisión'
+            # Obtener información de la bodega destino
+            destino_resp = requests.get(f"{self.bodegas_url}/{destino_id}")
+            if destino_resp.status_code != 200:
+                raise HTTPException(status_code=404, detail="Bodega destino no encontrada")
+            destino_data = destino_resp.json()
+            print(f"Datos bodega destino: {destino_data}")
+            
+            # Extraer correos y nombres
+            correo_destino = destino_data.get('correo')
+            nombre_bodega_destino = destino_data.get('nombre_bodega', 'N/D')
+            id_bodega_destino = destino_data.get('id_bodega', 'N/D')
+            
+            if not correo_destino:
+                raise HTTPException(status_code=400, detail="La bodega no tiene correo registrado")
+            
+            # Configuración del servidor SMTP
+            smtp_server = "smtp.gmail.com"
+            smtp_port = 587
+            sender_email = os.getenv("EMAIL_USER")
+            sender_password = os.getenv("EMAIL_PASSWORD")
+            
+            if not sender_email or not sender_password:
+                raise HTTPException(status_code=500, detail="Configuración de correo no disponible")
+            
+            # Construir cuerpo HTML
+            body_html = f"""
+                <html>
+                <body>
+                    <p>Estimado/a, buenas tardes:</p> 
+                    <p>Se ha actualizado el estado de la incidencia con los siguientes detalles:</p>
+
+                    <h3>Resumen de la Incidencia:</h3>
+                    <p><strong>ID Incidencia:</strong> {id_incidencia}</p>
+                    <p><strong>Estado actual:</strong> {nombre_tipo_estado}</p>
+                    <p><strong>Bodega:</strong> {nombre_bodega_destino}</p>
+                    <p><strong>Fecha de recepción:</strong> {fecha_recepcion}</p>
+                    <p><strong>Observaciones:</strong> {observaciones or 'No registradas'}</p>
+
+                    <br>
+                    <p><em>Este correo fue enviado de manera automática. Por favor, no responda a este mensaje.</em></p>
+                    <p>Saludos cordiales,</p>
+                </body>
+                </html>
+            """
+            
+            # Crear mensaje
+            message = MIMEMultipart()
+            message["From"] = sender_email
+            message["To"] = correo_destino
+            message["Subject"] = f"Se ha resuelto la Incidencia Nº {id_incidencia}"
+            
+            # Adjuntar HTML al correo
+            message.attach(MIMEText(body_html, "html"))
+            
+            # Enviar correo
+            with smtplib.SMTP(smtp_server, smtp_port) as server:
+                server.starttls()
+                server.login(sender_email, sender_password)
+                server.send_message(message)
+
+            return correo_destino
+
+        except HTTPException as he:
+            raise he
+
+        except Exception as e:
+            print(f"Error enviando correo: {e}")
+            raise HTTPException(status_code=500, detail=str(e))
+
 class LogCorreoRepository:
     #def log_envio_correo(self, db: Session, correo_destinatario: str, enviado: bool):
     def log_envio_correo(self, db: Session, correo_destinatario: str, enviado: bool):

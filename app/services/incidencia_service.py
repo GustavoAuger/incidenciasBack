@@ -52,3 +52,7 @@ class IncidenciaService:
 
     def update_estado_incidencia(self, body, db):
         return self.repository.update_estado_incidencia(body, db)
+    
+    def correo2(self, body, db):
+        return self.repository.enviar_correo_bodega2(body, db)
+        
