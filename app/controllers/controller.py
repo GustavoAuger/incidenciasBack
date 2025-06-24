@@ -161,3 +161,7 @@ async def create_reclamo_transportista(reclamo: ReclamoTransportistaCreate, db: 
 @router.put("/updateReclamoTransportista")
 async def update_reclamo_transportista(reclamo: ReclamoTransportistaResponse, db: Session = Depends(get_db)):
     return _reclamoService.update_reclamo_transportista(reclamo, db)
+
+@router.post("/getMovimientos")
+async def get_movimientos(body: dict, db: Session = Depends(get_db)):
+    return _externalService.get_movimientos(body, db)

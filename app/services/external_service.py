@@ -21,3 +21,6 @@ class ExternalService:
     
     def post_movimientos(self, body, db):
         return self.repository.post_movimientos(body, db)
+    
+    def get_movimientos(self, body, db):
+        return self.repository.get_movimientos(body, db)

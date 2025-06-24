@@ -68,3 +68,32 @@ class ExternalRepository:
         except requests.exceptions.RequestException as e:
             print(f"Error en la petición: {str(e)}")
             return False
+
+    def get_movimientos(self, body: dict, db: Session):
+        try:
+            id_incidencia = body.get('id_incidencia')
+            print(f"Buscando movimientos para incidencia: {id_incidencia}")
+            if not id_incidencia:
+                print("ID de incidencia no proporcionado")
+                return []
+
+            # Obtenemos todos los movimientos de la API
+            response = requests.get(self.movimientos_url)
+            
+            if response.status_code == 200:
+                movimientos = response.json()
+                # Filtramos los movimientos que coincidan con el id_incidencia
+                movimiento = next((m for m in movimientos if m.get('id_incidencia') == id_incidencia), None)
+                
+                if movimiento:
+                    print(f"Movimiento encontrado: {movimiento['id_movimiento']}")
+                    return movimiento['id_movimiento']
+                else:
+                    print(f"No se encontró movimiento para la incidencia {id_incidencia}")
+                    return None
+            else:
+                print(f"Error al obtener movimientos. Código: {response.status_code}")
+                return None
+        except requests.exceptions.RequestException as e:
+            print(f"Error en la petición: {str(e)}")
+            return None
