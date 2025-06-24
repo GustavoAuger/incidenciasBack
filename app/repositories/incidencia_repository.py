@@ -399,9 +399,17 @@ class IncidenciaRepository:
 
     def update_estado_incidencia(self, body, db):
         try:
-            db.query(Incidencia).filter(Incidencia.id == body['id_incidencia']).update({
+            # Crear el diccionario de actualización con los campos a actualizar
+            update_data = {
                 'id_estado': body['id_estado']
-            })
+            }
+            
+            # Si hay observaciones en el body, agregarlas al diccionario de actualización
+            if 'observaciones' in body:
+                update_data['observaciones'] = body['observaciones']
+            
+            # Actualizar la incidencia con los datos proporcionados
+            db.query(Incidencia).filter(Incidencia.id == body['id_incidencia']).update(update_data)
             db.commit()
             print("Incidencia actualizada exitosamente")
             return True
