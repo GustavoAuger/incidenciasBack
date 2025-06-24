@@ -36,19 +36,23 @@ class ReclamoRepository:
             db.rollback()
             print(f"Error inesperado al crear reclamo: {str(e)}")
             raise e
+
     
-    def update_reclamo_transportista(self, reclamo_data, db):
+    def get_reclamo_by_id(self, id: int, db):
+        return db.query(ReclamoTransportistaModel).filter(ReclamoTransportistaModel.id == id).first()
+
+    def update_reclamo(self, id: int, reclamo_data: dict, db):
         try:
             # Obtener el reclamo existente
             reclamo = db.query(ReclamoTransportistaModel).filter(
-                ReclamoTransportistaModel.id == reclamo_data.id
+                ReclamoTransportistaModel.id == id
             ).first()
             
             if not reclamo:
-                raise ValueError("Reclamo no encontrado")
+                return None
                 
             # Actualizar campos
-            for key, value in reclamo_data.dict().items():
+            for key, value in reclamo_data.items():
                 if hasattr(reclamo, key) and key != 'id':
                     setattr(reclamo, key, value)
             
