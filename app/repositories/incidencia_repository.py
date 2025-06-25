@@ -3,6 +3,8 @@ from fastapi import UploadFile, HTTPException
 from sqlalchemy.orm import Session
 from typing import Optional
 from fastapi import HTTPException
+from PIL import Image, ImageOps
+import io
 from app.auth import create_access_token  
 from passlib.context import CryptContext
 from app.models import TipoIncidencia
@@ -146,8 +148,9 @@ class IncidenciaRepository:
             print(f"Recibido archivo: {file.filename}")
             print(f"Tipo de contenido: {file.content_type}")
             print(f"Tamaño: {file.size} bytes")
-            # Si recibimos imagen, la subimos
-            ruta_storage = self.upload_image_to_supabase(file)
+            # Si recibimos imagen, reducimos la resolución y luego la subimos
+            optimized_file = self._optimize_image(file)
+            ruta_storage = self.upload_image_to_supabase(optimized_file)
         try:
             # Crear la incidencia principal
             nueva_incidencia = Incidencia(
@@ -216,6 +219,59 @@ class IncidenciaRepository:
             return {"mensaje": "Incidencia N°:"+str(id_incidencia)+ ",creada con éxito. Correo no enviado."}
 
 
+
+    def _optimize_image(self, file):
+        """
+        Reduce la resolución de la imagen manteniendo la proporción.
+        """
+        try:
+            # Leer el archivo como imagen
+            image = Image.open(file.file)
+            
+            # Obtener las dimensiones originales
+            width, height = image.size
+            
+            # Definir el máximo ancho deseado (puedes ajustar este valor)
+            max_width = 1920
+            
+            # Calcular nuevas dimensiones manteniendo la proporción
+            if width > max_width:
+                ratio = max_width / width
+                new_width = int(width * ratio)
+                new_height = int(height * ratio)
+                
+                # Redimensionar la imagen
+                image = image.resize((new_width, new_height), Image.Resampling.LANCZOS)
+            
+            # Convertir a RGB si es necesario (para manejar formatos como PNG con transparencia)
+            if image.mode in ('RGBA', 'LA') or (image.mode == 'P' and 'transparency' in image.info):
+                image = image.convert('RGB')
+            
+            # Convertir la imagen optimizada a bytes
+            optimized_bytes = io.BytesIO()
+            
+            # Obtener la extensión del archivo
+            file_extension = file.filename.split('.')[-1].lower()
+            
+            # Determinar el formato de guardado
+            if file_extension in ['jpg', 'jpeg']:
+                format = 'JPEG'
+                # Optimizar la calidad para JPEG
+                image.save(optimized_bytes, format=format, quality=85, optimize=True)
+            else:
+                format = file.content_type.split('/')[-1].upper()
+                image.save(optimized_bytes, format=format)
+            
+            optimized_bytes.seek(0)
+            
+            # Crear un nuevo UploadFile con los datos optimizados
+            return UploadFile(
+                file=optimized_bytes,
+                filename=file.filename
+            )
+        except Exception as e:
+            print(f"Error optimizando imagen: {e}")
+            raise HTTPException(status_code=500, detail="Error al optimizar la imagen")
 
     def upload_image_to_supabase(self, file, db=None, filename_prefix="detalle"):
         try:
