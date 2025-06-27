@@ -171,3 +171,7 @@ async def update_reclamo_transportista(reclamo: ReclamoTransportistaResponse, db
 @router.post("/getMovimientos")
 async def get_movimientos(body: dict, db: Session = Depends(get_db)):
     return _externalService.get_movimientos(body, db)
+
+@router.get("/getAllIncidencias")
+async def get_all_incidencias(db: Session = Depends(get_db)):
+    return _incidenciaService.get_all_incidencias(db)

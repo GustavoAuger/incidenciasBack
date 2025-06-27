@@ -55,4 +55,6 @@ class IncidenciaService:
     
     def correo2(self, body, db):
         return self.repository.enviar_correo_bodega2(body, db)
-        
+    
+    def get_all_incidencias(self, db):
+        return self.repository.get_all_incidencias(db)

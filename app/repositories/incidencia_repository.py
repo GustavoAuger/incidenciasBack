@@ -560,6 +560,9 @@ class IncidenciaRepository:
             print(f"Error enviando correo: {e}")
             raise HTTPException(status_code=500, detail=str(e))
 
+    def get_all_incidencias(self, db: Session):
+        return db.query(Incidencia).all()
+
 class LogCorreoRepository:
     #def log_envio_correo(self, db: Session, correo_destinatario: str, enviado: bool):
     def log_envio_correo(self, db: Session, correo_destinatario: str, enviado: bool):
@@ -573,4 +576,3 @@ class LogCorreoRepository:
         return log
 
     
-        
