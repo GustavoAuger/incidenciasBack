@@ -202,6 +202,7 @@ class IncidenciaRepository:
         # Si todo salió bien, hacer commit de la transacción
         db.commit()
         # Enviar correo a la bodega de origen
+        correo_destino = None
         try:
             # llamamos directamente a la funcion, le pasamos los datos de la incidencia
             correo_destino = self.enviar_correo_bodega(nueva_incidencia)
