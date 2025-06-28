@@ -382,14 +382,13 @@ class IncidenciaRepository:
             detalles_formateados.append({
                 "id": detalle.id,
                 "idIncidencia": detalle.id_incidencia,
-                "sku": detalle.sku_producto,
-                "numBulto": detalle.nro_bulto,
-                "pesoOrigen": float(detalle.peso_origen),  # Convertir Decimal a float
-                "pesoRecepcion": float(detalle.peso_recepcion),  # Convertir Decimal a float
-                "cantidad": detalle.cantidad,
-                "numGuia": detalle.id_guia,
-                "tipoDiferencia": detalle.tipo_de_diferencia,
-                "descripcion": ""  # Agregar este campo si lo necesitas
+                "sku": detalle.sku_producto if detalle.sku_producto else "",
+                "numBulto": detalle.nro_bulto if detalle.nro_bulto else "",
+                "pesoOrigen": float(detalle.peso_origen) if detalle.peso_origen else "",
+                "pesoRecepcion": float(detalle.peso_recepcion) if detalle.peso_recepcion else "",
+                "cantidad": detalle.cantidad if detalle.cantidad else "",
+                "numGuia": detalle.id_guia if detalle.id_guia else "",
+                "tipoDiferencia": detalle.tipo_de_diferencia if detalle.tipo_de_diferencia else ""
             })
         
         return detalles_formateados
