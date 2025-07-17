@@ -102,9 +102,9 @@ class Detalle(Base):
     peso_recepcion = Column(Numeric(10, 2), nullable=True)
     cantidad = Column(Integer, nullable=False)
     id_guia = Column(String(50), nullable=False)
-    ruta_storage = Column(Text, nullable=True)
     tipo_de_diferencia = Column(String(20), nullable=False) 
     estado = Column(Boolean, default=True)
+
 # Tabla REPORTE
 class Reporte(Base):
     __tablename__ = "reporte"
